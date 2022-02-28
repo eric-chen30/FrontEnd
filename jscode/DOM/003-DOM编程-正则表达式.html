@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>正则表达式</title>
+</head>
+<body>
+    <script>
+        /*
+            1.正则表达式：Regular Experssion      主要用于字符串格式匹配方面，包括搜索方面
+            2.正则表达式是一门独立的学科，Java、C、JavaScript都支持  大部分编程语言都支持
+            3.正则表达式掌握内容：
+                常见的正则表达式符号
+                简单的正则表达式要会写
+                正则表达式能看懂
+                JavaScript中如何创建正则表达式
+                JavaScript中，正则表达式对象有哪些方法
+                网络上快速找到所需的正则表达式并测试有效性
+            
+            4.常见的符号：
+                .   匹配除换行符以外的任意字符
+                \w  匹配字母、数字、下划线、汉字
+                \s  匹配任意空白符
+                \d  匹配数字
+                \b  匹配单词的开始或结束
+                ^   匹配字符的开始
+                $   匹配字符的结束
+            
+            5.正则表达式中的小括号()优先级比较高
+            [1-9]表示1到9中的任意一个数字（次数为1次）
+            [A-Za-z0-9] A-Z a-z 0-9中的任意一个字符
+            [A-Za-z0-9-] A-Z a-z 0-9 - 中的任意一个字符
+
+            Email地址：^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$
+            腾讯QQ号：[1-9][0-9]{4,} (腾讯QQ号从10000开始)
+
+            6.创建正则表达式对象，调用正则表达式对象的方法
+                var regExp = /正则表达式/flags;
+                var regExp = new RegExp("正则表达式", "flags");
+
+                关于flags：
+                    g   全文查找
+                    i   忽略大小写匹配模式
+                    m   多行匹配        ES规范制定后才支持  如果前面是正则表达式，flags不能用m，前面是普通字符串的时候使用
+
+                正则表达式对象的test()方法
+                    true/false  = 正则表达式对象.test("用户填写的字符串");
+        */
+
+        window.onload = function(){
+            // 给按钮绑定点击事件
+            document.getElementById("btn").onclick = function(){
+                var email = document.getElementById("email").value;
+                var emailRegExp = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
+                var ok = emailRegExp.test(email);
+                console.log(email,emailRegExp,ok);   // 张三 /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/ false
+                
+                // Uncaught TypeError: Cannot set properties of null (setting 'innerText') at HTMLInputElement.document.getElementById.onclick
+                // 遇到这种错误时，说明没有获取到节点对象，因此无法设置对象属性，需要取检查 id后面的双引号是否完整
+                if(ok){
+                    document.getElementById("emailError").innerText = "邮箱地址合法";
+                    console.log("合法");
+                }else{
+                    document.getElementById("emailError").innerText = "邮箱地址不合法";
+                    console.log("不合法");
+                }
+            }
+
+            // 给文本框绑定focus
+            document.getElementById("email").onfocus = function(){
+                document.getElementById("emailError").innerText = "";
+            }
+        }
+
+    </script>
+
+    <input type="text" id="email">
+    <span id="emailError" style="color: red; font-size: 12px;"></span>
+    <br>
+    <input type="button" value="验证邮箱" id="btn">
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>区别</title>
+</head>
+<body>
+    <script>
+        // 三者数据类型不一致
+        console.log(typeof null, typeof NaN, typeof undefined);  // object  null  undefined
+
+        // null 和 undefined可以等同
+        console.log(null == NaN);       // false
+        console.log(null == undefined); // true
+        console.log(undefined == NaN);  // false
+
+        // 在js中有两个比较特殊的运算符
+        //     ==  等同运算符       只判断值是否相等
+        //     === 全等运算符       判断值是否相等，也要判断数据类型是否相等
+        console.log(null === NaN);       // false
+        console.log(null === undefined); // false
+        console.log(undefined === NaN);  // false
+
+        // so,null和 undefined数据类型不同，但在数值上可以等同
+        console.log(1 == true);     // true
+        console.log(1 === true);    // false
+
+
+
+    </script>
+</body>
+</html>

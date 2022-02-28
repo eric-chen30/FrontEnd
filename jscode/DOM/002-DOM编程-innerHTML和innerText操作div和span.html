@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM编程-innerHTML和innerText操作div和span</title>
+
+    <style>
+        #div1{
+            background-color: aquamarine;
+            width: 300px;
+            height: 300px;
+            border: 1px black solid;
+            position: absolute;
+            top: 100px;
+            left: 100px;
+        }
+    </style>
+</head>
+<body>
+
+    <script>
+        /*
+            innerText和innerHTML的相同点和不同点：
+                相同点：两者都是设置元素内容
+                不同点：前者直接将字符串解释为文本   后者将字符串看成一段HTML代码
+        */
+
+        window.onload = function(){
+            // 获取按钮节点
+            var btn = document.getElementById("btn");
+            // 将事件注册到按钮上
+            btn.onclick = function(){
+                var divElt = document.getElementById("div1");
+                // divElt.innerHTML = "<font color='red'>用户名不能为空:</font>";   // 解释为html代码
+                divElt.innerText = "<font color='red'>用户名不能为空:</font>";      // 解释为文本内容
+            }
+        }
+    </script>
+
+    <input type="button" value="设置div中的内容" id="btn">
+    <div id="div1"></div>
+</body>
+</html>

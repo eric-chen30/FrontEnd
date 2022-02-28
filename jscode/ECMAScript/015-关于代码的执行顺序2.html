@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>代码的执行顺序</title>
+</head>
+<!--onload页面元素全部加载完毕后才会发生
+    有onload：页面加载完毕后事件才会发生
+    没有onload：顺序到指定位置的时候执行
+-->
+<body>
+    <input type="button" value="hello" id="mybtn">
+    <script>
+
+        // window.onload = ready;
+
+        // function ready(){
+        //     var btn = document.getElementById("mybtn");
+        //     btn.onclick = function(){
+        //         console.log("hello js");
+        //     }
+        // }
+
+        // 内部有两个回调函数，第一个在页面加载完毕后执行，第二个在鼠标点击事件发生后执行
+        // 页面加载的过程中，将a函数注册给了load事件
+        // 页面加载完毕之后，load事件发生了，此时执行回调函数
+        // 回调函数a执行过程中，把b函数注册给了id="btn"的click事件
+        // 当id="btn"的节点发生click事件之后，b函数被调用
+        window.onload = function(){
+            var btn = document.getElementById("mybtn");
+            btn.onclick = function(){
+                console.log("hello js");
+            }
+        }
+    </script>
+</body>
+</html>

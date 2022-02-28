@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            Undefined类型只有一个值，这个值就是undefined
+            当一个变量没有手动赋值，系统默认赋值undefined
+            或者可以手动赋值undefined
+        */
+
+        var i;                  //undefined
+        var k = undefined;      //undefined
+        console.log(i == k);
+        var y = "undefined";    //string  "undefined"
+        console.log( y == k);
+
+        /*
+            1.Number类型包括哪些值？
+                -1 0 1 2.3 3.14 ...NaN Infinity  整数、小数、正数、负数、不是数字、无穷大都是Number类型
+
+            2.关于isNaN函数
+                isNaN(数据),结果为true表示不是一个数字，结果为false表示是一个数字
+            
+            3.parseInt()
+            4.parseFloat()
+            5.Math.ceil()  向上取整
+            
+        */
+
+        var v1 = 1;
+        var v2 = 3.14;
+        var v3 = NaN;
+        var v4 = Infinity;
+        console.log(typeof v1,typeof v2, typeof v3, typeof v4);
+
+        // 运算结果本来是一个数字，最后算完不是一个数字的时候，结果是NaN
+        var a = 100;;
+        var b = "中国人";
+        console.log(a / b);  // NaN
+
+        var e = "abc";
+        var f = 10;
+        console.log(e + f);  // "abc10"  字符串拼接
+
+        // Infinity 当除数为0的时候，结果为无穷大
+        console.log(10 / 0);    // Infinity
+        console.log(10 / 3);    // 3.3333333333333335
+
+
+        console.log(isNaN(2222));   // false
+        console.log(isNaN("abc"));  // true
+
+        function sum(a,b){
+            if(isNaN(a) || isNaN(b)){
+                alert("参与运算的必须是数字");
+                return;
+            }
+            return a + b;
+        }
+        console.log(sum(1,10));     // 11
+        console.log(sum("a",10));   // undefined
+
+        // 将字符串自动成数字，并取整数位
+        console.log(parseInt("3.999"));     // 3
+        console.log(parseInt(3.999));       // 3
+        console.log(parseFloat("3.2") + 1); // 4.2
+        console.log(Math.ceil(2.2));        // 3
+
+
+        
+    </script>
+</body>
+</html>

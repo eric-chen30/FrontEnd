@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS的控制语句</title>
+</head>
+<body>
+    <script>
+        /*
+            1. if
+            2. swith
+            3. while
+            4. do.. while..
+            5. for
+            6. break
+            7. continue
+            8. for..in
+            9.with语句
+        */
+
+        // 创建JS数组       元素随意、个数随意
+        var arr = [false, true, "abc", 123];
+        // 遍历数组
+        for(var i = 0; i< arr.length; i++){
+            console.log(arr[i]);
+        }
+
+
+        // i是数组的下标        遍历数组时，i为数组下标
+        for(var i in arr){
+            console.log(arr[i]);
+        }
+
+        // 构造函数，构造User对象
+        User = function(username, password){
+            this.username = username;
+            this.password = password;
+        }
+
+        var u = new User("King", 666);
+        console.log(u.username + "," + u.password);
+        console.log(u["username"] + "," + u["password"]);
+
+        // 遍历对象的属性
+        for(var shuXingMing in u){
+            console.log(shuXingMing,typeof shuXingMing);  // shuXingMing类型为string
+            console.log(u[shuXingMing]);  // 因为shuXingMing为字符串，所以不需要加双引号
+        }
+
+        // with写法
+        alert(u.username);
+        alert(u.password);
+
+        with(u){
+            alert(username + "," + password);
+        }
+
+
+    </script>
+</body>
+</html>
+
+<!--
+    public class Test{
+        public static void main(String[] args){
+            int[] arr = {1,2,3,4,5,6};
+            int[] arr2 = new int[5];            //等同于：int[] arr2 = {0,0,0,0,0};
+            String[] arr3 = {"a", "b", "c"};    
+            String[] arr4 = new String[3];      // 等同于：String[] arr4 = {null, null, null};
+        }
+    }
+
+    JavaScript包括三块：
+        1. ECMAScript       核心语法
+        2. DOM              文档部分
+        3. BOM              浏览器本身的操作
+-->

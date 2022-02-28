@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>常用事件</title>
+</head>
+<body>
+    <script>
+        /*
+            blur        失去焦点
+            change      下拉列表选项改变或者文本框内容改变
+            click       鼠标单击
+            dblclick    鼠标双击
+            focus       获得焦点
+            keydown     键盘按下
+            keyup       键盘弹起
+            load        页面加载完毕        整个html页面中所有元素加载完毕之后发生
+            mousedown   鼠标按下
+            mouseover   鼠标经过
+            mouseout    鼠标移开
+            mouseup     鼠标弹起
+            reset       表单重置
+            select      文本被选定
+            submit      表单提交
+
+            任何一个事件都会对应一个事件句柄，事件句柄在事件前添加on
+            事件句柄以属性存在
+        */
+
+        // 回调函数，自己把这个函数代码写出来，但是这个函数不是由自己负责，而是由其他程序负责调用
+        function sayHello(){
+            console.log("hello JavaScript");
+        }
+
+    </script>
+
+    <!--将sayHello函数注册到按钮上，等待事件click事件发生之后，该函数被浏览器调用，我们称这个函数为回调函数-->
+    <input type="button" value="hello" onclick="sayHello()">
+
+    <input type="button" value="hello2" id="mybtn">
+    <input type="button" value="hello3" id="mybtn1">
+    <input type="button" value="hello4" id="mybtn2">
+
+    <script>
+        // 第二种方式注册事件
+        // 第一步：获取这个按钮对象，document是全部小写，内置对象，可以直接使用，document代表整个html页面
+        // 需要注意的是，input标签必须放在script之前，否则根据id定位到按钮
+        function dosome(){
+            console.log("这是事件注册的第二种方式");
+        }
+        var btnObj = document.getElementById("mybtn")
+        btnObj.onclick = dosome;    // 千万别加小括号，是错误写法。  这行代码的含义将回调函数注册到click事件上
+
+        var mybtn1 = document.getElementById("mybtn1");
+        // 这个匿名函数也是回调函数，页面打开时不发生，只是注册到click事件上，点击后进行调用
+        mybtn1.onclick = function(){
+            console.log("直接将匿名函数注册到click事件上");
+        }
+
+        document.getElementById("mybtn2").onclick = function(){
+            console.log("一行代码完成函数注册到click事件上，这是常用写法");
+        }
+
+        
+    </script>
+
+</body>
+</html>
+
+<!--
+    java中也有回调函数机制：
+        public class MyClass{
+            public static void main(String[] args){
+                // 主动调用run()方法，这个角度看run()方法为正向调用
+                run();
+            }
+            // 站在run方法的编写者角度来看，把run方法叫做回调函数
+            public static void run(){
+                System.out.println("run...");
+            }
+        }
+
+-->

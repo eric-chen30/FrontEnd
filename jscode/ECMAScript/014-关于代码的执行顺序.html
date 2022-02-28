@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>代码的执行顺序</title>
+</head>
+<!--onload页面元素全部加载完毕后才会发生
+    有onload：页面加载完毕后事件才会发生
+    没有onload：顺序到指定位置的时候执行
+-->
+<body onload="ready()">
+    <input type="button" value="hello" id="mybtn">
+    <script>
+        /*
+            // 第一步：更具id获取节点对象
+            var btn = document.getElementById("mybtn");     // 返回null 因为代码执行到此处的时候id="btn"的元素还没有加载到内存
+
+            // 第二步：给节点对象绑定事件
+            btn.onclick = function(){
+                console.log("hello js");
+            }
+        */
+
+        function ready(){
+            var btn = document.getElementById("mybtn");
+            btn.onclick = function(){
+                console.log("hello js");
+            }
+        }
+    </script>
+</body>
+</html>

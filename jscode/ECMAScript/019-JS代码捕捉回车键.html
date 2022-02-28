@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>捕捉回车键</title>
+</head>
+<body>
+    
+    <script>
+        window.onload = function(){
+            var usernameElt = document.getElementById("username");
+            // 获取键值     回车键的键值 13 ESC键的键值是27
+            usernameElt.onkeydown = function(event){
+                console.log("按下键盘" + event);   // 按下键盘[object KeyboardEvent]
+                // 对于键盘事件对象来说，都有keyCode属性来获取键值
+                console.log(event.keyCode);   // 回车是13
+
+                if(event.keyCode == 13){
+                    alert("正在验证........");
+                }else{
+                    console.log(event.code);
+                }
+            }
+        }
+
+        // 张三程序员写了这样一个函数
+        // function sum(){
+        //     console.log("sum execute....!");
+        // }
+
+        function sum(event){
+            console.log(event);
+        }
+
+        // 李四程序员调用了sum函数
+        sum("hello world!");    // hello world
+    </script>
+
+    <input type="text" id="username">
+</body>
+</html>
+
+<!-- 
+强制性，设置的参数必须使用   而js中没有明确的限制
+public boolean login(String username, String password){} 
+-->

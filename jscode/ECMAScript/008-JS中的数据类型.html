@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head></head>
+<body>
+    <script type="text/javascript">
+        /*
+            1.js中变量声明不需要指明数据类型，但是赋值时，每个变量有数据类型
+                js中的数据类型有：原始类型、引用类型
+                原始类型：Undefined、Number、String、Boolean、Null
+                引用类型：Object以及Object的字类
+
+            2.ES规范，在ES6之后，添加了一种新的数据类型，Symbol
+
+            3.JS中有一种运算符叫做typeof，这个运算符可以在程序的运行阶段动态获取变量的数据类型
+                typeof 变量名
+            typeof的运算结果是数据类型，字符串都是小写
+
+            4.在js中比较字符串使用==
+        */
+
+        // 要求两参数都是数字，不能是其它类型
+        function sum(a,b){
+            if(typeof a == "number" && typeof b == "number"){
+                return a + b ;
+            }
+            alert(a + "," + b + "必须都是数字");
+        }
+
+        // 因为别人直接调用你的函数进行传参，不知道参数的类型
+        var retValue = sum(false,"abc");
+        alert(retValue); //undefined
+
+        var i;
+        console.log(typeof i);   //undefined
+        var k = 10;
+        console.log(typeof k);  //number
+        var f = "abc";
+        console.log(typeof f);  //string
+        var d = null;
+        console.log(typeof d);   // object      null属于Null类型，但是typeof运算符的结果是object
+        var flag = false;
+        console.log(typeof flag);   //boolean
+        var obj = new Object();
+        console.log(typeof obj);  //object
+        function sayHello(){}
+        console.log(typeof sayHello);  //function
+
+        
+
+
+    </script>
+</body>
+
+</html>

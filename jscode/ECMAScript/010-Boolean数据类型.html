@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boolean类型</title>
+</head>
+<body>
+    <script>
+        /*
+            1. js中的布尔类型只有两个值：true/false
+            2.Boolean()函数的作用将非布尔类型转换为布尔类型
+            3.Null类型只有一个值为null,但是 typeof null结果为object
+        */
+
+        var username = "jack";
+        // if后面的小括号中必须为Boolean类型，如果不是，将自动调用Boolean()函数转换为Boolean类型
+        if(!username){
+            alert("用户名不能为空");
+        }else{
+            alert("欢迎你" + username);
+        }
+
+        // 有就转换为真，没有就转换为false
+        console.log(Boolean(1));    // true
+        console.log(Boolean(0));    // false
+        console.log(Boolean(""));   // false
+        console.log(Boolean("abc"));// true
+        console.log(Boolean(null)); // false
+        console.log(Boolean(NaN));  // false
+        console.log(Boolean(undefined));// false
+        console.log(Boolean(Infinity)); // true
+
+        // 无限弹窗
+        // while( 10 / 3){
+        //     alert("哈哈哈哈哈哈哈哈");
+        // }
+
+        for(var i = 0; i < 10;i++){
+            console.log("i=" + i);
+        }
+
+    </script>
+</body>
+</html>
