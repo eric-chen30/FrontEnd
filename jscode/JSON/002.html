@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>复杂一些的JSON对象</title>
+</head>
+<body>
+    <script>
+        var user = {
+            "usercode": 110,
+            "username": "csstar",
+            "sex": "男",
+            "flag": true,
+            "address": {"city": "北京", "street": "大兴区", "zipcode": "12121212"},
+            "aihao": ["smoke", "drink", "head"]
+        }
+
+        console.log(user.address.city);
+
+        /*
+            自行设计JSON格式的数据，这个JSON格式的数据可以描述整个班级中每一个学生的信息，以及总人数信息
+        */
+
+        var jsonObjs = {
+            "total" : 3,
+            "students" : [
+                {"name": "zhangsan", "age": 20, "sex": "男"},
+                {"name": "lisi", "age": 22, "sex": "女"},
+                {"name": "wangwu", "age": 19, "sex": "男"},
+            ]
+        }
+        
+
+    </script>
+</body>
+</html>

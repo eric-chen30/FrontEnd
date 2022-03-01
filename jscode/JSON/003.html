@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eval函数</title>
+</head>
+<body>
+    <script>
+        /*
+            eval函数的作用：
+                把字符串当作一段JS代码解释并执行
+        */
+
+        window.eval("var i = 100;");   // var i = 100;         
+        console.log("i的值为:" + i);    // i = 100
+
+        // Java连接数据库，查询数据之后，将数据在Java程序中拼接成JSON格式的‘字符串’，将JSON字符串响应到浏览器
+        // 也就是说Java响应到浏览器上的仅仅是一个”JSON格式的字符串“，还不是一个JSON对象
+        // 可以使用eval函数，将JSON格式的字符串转换成对象
+
+        var formJava = "{\"name\": \"zhangsan\", \"password\": \"123\"}";
+        // 将以上的JSON格式的字符串转换成JSON对象
+        window.eval("var jsonObj = " + formJava);
+        // 访问JSON对象
+        console.log(jsonObj.name + "," + jsonObj.password);
+
+
+        /*
+            在JS中，[] 和 {} 有什么区别？
+                []  是数组
+                {}  是JSON
+
+                Java:        int[] arr = {1,2,3,4,5};
+                JavaScript:  var arr = [1,2,3,4,5];
+                JSON:        var jsonObj = {"email": "zhangsan@123.com", "age": 25};
+
+
+                JSON在JS中以数据对象的形式存在
+        */
+
+        var json = {
+            "username": 'zhangsan'
+        }
+
+        console.log(json.username);
+        console.log(json["username"]);
+
+    </script>
+</body>
+</html>

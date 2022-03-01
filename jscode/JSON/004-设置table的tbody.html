@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>设置table的tbody</title>
+</head>
+<body>
+    <script>
+        // 有json数据
+
+        var data = {
+            "total": 14,
+            emps: [
+                {"empno":7369, "ename": "Eric", "sal": 800.0},
+                {"empno":7370, "ename": "Smith", "sal": 3800.0},
+                {"empno":7371, "ename": "Jack", "sal": 2800.0},
+                {"empno":7372, "ename": "Marry", "sal": 1800.0},
+            ]
+        };
+
+        // 希望把数据展示到table中
+        window.onload = function(){
+            var displayBtnElt = document.getElementById("displayBtn");
+
+            displayBtnElt.onclick = function(){
+                // 解析JSON数据渲染到表格中
+                var emps = data.emps;
+                var html = "";
+
+                for(var i = 0; i < emps.length; i++){
+                    var emp = emps[i];
+
+                    html += "<tr>";
+                    html += "<td>" + emp.empno + "</td>";
+                    html += "<td>" + emp.ename + "</td>";
+                    html += "<td>" + emp.sal + "</td>";
+                    html += "</tr>";
+                }
+
+                document.getElementById("emptbody").innerHTML = html;
+                document.getElementById("count").innerHTML = data.total;
+            }
+        }
+
+    </script>
+
+    <input type="button" value="显示员工信息" id= "displayBtn">
+    <h2>员工信息列表</h2>
+    <hr>
+    <table border="1px" width="50%">
+
+        <tr>
+            <th>员工编号</th>
+            <th>员工名字</th>
+            <th>员工薪资</th>
+        </tr>
+
+        <tbody id="emptbody">
+            <!-- <tr>
+                <td>7369</td>
+                <td>Eric</td>
+                <td>800.0</td>
+            </tr>
+            <tr>
+                <td>7369</td>
+                <td>Eric</td>
+                <td>800.0</td>
+            </tr>
+            <tr>
+                <td>7369</td>
+                <td>Eric</td>
+                <td>800.0</td>
+            </tr> -->
+        </tbody>
+        
+    </table>
+    总共<span id="count">0</span>条数
+</body>
+</html>
