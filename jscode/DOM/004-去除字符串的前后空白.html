@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>去除字符串前后空白</title>
+</head>
+<body>
+    
+    <!--文件未跟踪：本地文件与远端仓库有一个关联，未跟踪说明本地文件没有更新到远端仓库上-->
+
+    <script>
+        
+        // 低版本的IE浏览器不支持字符串的trim()函数怎么办？
+        // 可以自己对String类扩展一个全新的trim()函数
+
+        // 这里一旦扩展了trim()函数，就会把String自身的trim()函数覆盖掉，下面调用时调用的就是你扩展的函数
+        String.prototype.trim = function(){
+            // alert("扩展后的trim()函数")
+
+            // 去除当前字符串的前后空白     在当前方法中的this代表的是当前的字符串
+            return this.replace(/^\s+/, "").replace(/\s+$/, "");
+
+        }
+        
+        window.onload = function(){
+            document.getElementById("btn").onclick = function(){
+                var username = document.getElementById("username").value;
+                if(username == ""){
+                    alert("请输入........");
+                }
+                username = username.trim();
+                console.log("用户名为:" + username);
+            }
+        }
+        
+    </script>
+
+    <input type="text" id="username">
+    <input type="button" value="获取用户名" id="btn">
+</body>
+</html>
