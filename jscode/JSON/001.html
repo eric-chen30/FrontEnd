@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON</title>
+</head>
+<body>
+    <script>
+        /*
+            1. 什么是JSON，有什么用？
+                JavaScript Objection Notation  是一种数据交换格式
+                目前非常流行，90%以上的系统，系统A与系统B交换数据的话，都是采用JSON
+            2. JSON是一种轻量级的数据交换格式 
+                特点：体积小，容易解析
+            3. 在实际的开发中，有两种使用最多，为 JSON  和 XML
+                XML 体积比较大，解析麻烦  但是其优点是：语法严谨，通常银行系统之间的数据交换使用XML
+            4. HTML XML有一个父亲: SMGL（标准通用的标记语言）
+        */
+
+        // 创建JSON对象(也可以成为无类型对象)
+        var jsonObj = {
+            "sno" : "110",
+            "sname": "城市沙特人",
+            "sex": "male"
+        }
+
+        console.log(jsonObj.sno,jsonObj.sname,jsonObj.sex);
+
+        Student = function(sno,sname,sex){
+            this.sno = sno;
+            this.sname = sname;
+            this.sex = sex;
+        }
+
+        var stu = new Student("111", "张三", "female");
+        console.log(stu.sno,stu.sname,stu.sex);
+
+        // JSON数组
+        var students = [
+            {"sno" : "110","sname": "张三","sex": "男"},
+            {"sno" : "111","sname": "李四","sex": "男"},
+            {"sno" : "112","sname": "王五","sex": "女"}
+        ]
+
+        for(var i=0; i<students.length;i++){
+            var stuObj = students[i];
+            console.log(students[i].sno,students[i].sname,students[i].sex);
+        }
+
+    </script>
+</body>
+</html>

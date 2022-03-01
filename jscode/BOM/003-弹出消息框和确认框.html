@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>弹出消息框和确认框</title>
+</head>
+<body>
+
+    <script>
+        function del(){
+            var ok = window.confirm("确认要删除吗?");
+            console.log(ok);   // true为确认  false为取消
+        }
+    </script>
+
+    <input type="button" value="弹出消息框" onclick="window.alert('弹出成功')">
+    <input type="button" value="弹出确认框(删除)" onclick="del()">
+</body>
+</html>

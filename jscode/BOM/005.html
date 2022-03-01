@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            如果当前窗口不是顶级窗口，将其设置为顶级窗口
+        */
+
+        function setTop(){
+            console.log((window.top != window.self));
+            // 如果当前窗口不是顶级窗口
+            if(window.top != window.self){
+                // 将当前窗口设置为顶级窗口
+                window.top.location = window.self.location;
+            }
+        }
+
+    </script>
+    005页面
+    <input type="button" value="如果当前窗口不是顶级窗口,将其设置为顶级窗口" onclick="setTop()">
+</body>
+</html>
