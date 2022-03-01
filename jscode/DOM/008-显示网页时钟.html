@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>显示网页时钟</title>
+</head>
+<body>
+    <script>
+        /*
+            JS中内置的支持类：Date 用来获取事件/日期
+
+        */
+
+        var nowTime = new Date();
+        document.write(nowTime);
+        document.write("<br>");
+        // 转换成具有本地语言环境的日期格式
+        document.write(nowTime.toLocaleString());
+
+        var t = new Date();
+        var year = t.getFullYear();  // 返回年信息，全信息格式
+        var month = t.getMonth();
+        var day = t.getDate();
+        document.write("<br>");
+        document.write(year + "年" + (month + 1) + "月" + day + "日");
+
+        document.write("<br>");
+        document.write("<br>");
+
+        // 重点：怎么获取毫秒数？
+        var times = t.getTime();
+        document.write(times);   // 一般会使用毫秒数 当作时间戳
+
+
+        function displayTime(){
+            var time = new Date();
+            var strTime = time.toLocaleString();
+            document.getElementById("timeDiv").innerText = strTime;
+        }
+
+        // 每隔1000毫秒调用一次dispalyTime()函数
+        function start(){
+            // 此时 v 为全局变量  方便下面进行clearInterval的传参
+            v = window.setInterval("displayTime()", 1000);      // 返回值，可以传递给 Window.clearInterval()从而取消对code周期性的执行
+        }
+
+        function stop(){
+            window.clearInterval(v);
+        }
+        
+
+    </script>
+
+    <br><br>
+    <input type="button" value="显示系统时间" onclick="start()">
+    <input type="button" value="系统时间停止" onclick="stop()">
+    <br><br>
+    <div id="timeDiv"></div>
+
+</body>
+</html>

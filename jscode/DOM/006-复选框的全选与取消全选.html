@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>复选框的全选与取消全选</title>
+</head>
+<body>
+    <script>
+        
+        window.onload = function(){
+            // 第一个复选框的点击来控制下面三个复选框
+            var controlElt = document.getElementById("control");
+            
+            
+            // controlElt.onclick = function(){
+            //     var aihaos = document.getElementsByName("aihao");
+            //     console.log(aihaos);
+            //     if (controlElt.checked) {
+            //         for (var i = 0; i < aihaos.length; i++) {
+            //             aihaos[i].checked = true;     
+            //         }
+            //     } else {
+            //         for (var i = 0; i < aihaos.length; i++) {
+            //             aihaos[i].checked = false;     
+            //         }
+            //     }
+            // }
+
+            // 简化：全选的状态和下面三个复选框的状态是一样的
+
+            var aihaos = document.getElementsByName("aihao");
+            console.log(aihaos);
+            
+            controlElt.onclick = function(){
+                for (var i = 0; i < aihaos.length; i++) 
+                {
+                    aihaos[i].checked = controlElt.checked;     
+                }
+            }
+
+            var all = aihaos.length;
+            console.log(all);
+            for(var i =0; i < aihaos.length; i++){
+                
+                // 循环注册点击事件
+                aihaos[i].onclick = function(){
+                    console.log("点击");
+                    var checkedCount = 0;
+                    // 如果三个都选中，需要修改全选框的状态     总数量 == 选中的数量
+                    for (var i = 0; i < aihaos.length; i++) 
+                    {
+                        if (aihaos[i].checked) {
+                            checkedCount++;
+                        }     
+                    }
+
+                    console.log(checkedCount);
+
+                    controlElt.checked = (all == checkedCount);
+
+                    // if (all == checkedCount) {
+                    //     controlElt.checked = true;
+                    // }else{
+                    //     controlElt.checked = false;
+                    // }
+                }
+
+            }
+
+
+
+
+        }
+        
+        
+    </script>
+
+    <input type="checkbox" id="control">全选<br><br>
+    <input type="checkbox" name="aihao" id="smoke">抽烟<br><br>
+    <input type="checkbox" name="aihao" id="drink">喝酒<br><br>
+    <input type="checkbox" name="aihao" id="head">烫头<br><br>
+
+</body>
+</html>
