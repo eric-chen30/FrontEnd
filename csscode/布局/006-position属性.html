@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>position属性</title>
+
+    <script>
+        /*
+            如果没有设置positon属性，那么用于定位的top、bottom、left、right将不起作用!!!
+
+            position属性：
+                static      默认定位方式                  不受定位属性的影响              始终根据页面正常流进行定位
+                relative    相对于其正常位置进行定位       使用定位属性进行位置调整
+                fixed       相对于视口进行定位             随着页面的滚动也始终在同一位置
+                absolute    相对于父元素进行定位
+                sticky      根据用户的滚动位置进行定位     随着滚动在relative 和 fixed 之间切换   粘性元素 
+        */
+    </script>
+
+</head>
+
+    <style>
+        .relative {
+            position: relative;
+            width: 400px;
+            height: 200px;
+            border: 3px solid red;
+        }
+
+        .absolute {
+            position: absolute;
+            top: 80px;
+            right: 20px;
+            width: 100px;
+            height: 100px;
+            border: 2px solid sandybrown;
+        }
+    </style>
+
+<body>
+    <h1>默认position属性为static</h1>
+    <p>正常的页面流 h标签和p标签都为块级元素  占一行</p>
+    <div class="relative">这个div元素设置position属性为relative
+        <div class="absolute">这个div设置position属性为absolute</div>
+    </div>
+
+</body>
+</html>

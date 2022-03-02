@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>display和hidden的区别</title>
+</head>
+
+    <style>
+        .imgbox{
+            float: left;
+            text-align: center;
+            width: 185px;
+            border: 1px solid royalblue;
+            margin: 4px;
+            padding: 8px;
+        }
+    </style>
+
+<body>
+    <!--display: none;-->
+    <div class="imgbox" id="box1">
+        <div style="width: 100%; height: 100px; background-color: darkblue;"></div><br>
+        <button onclick="deleteBox()">删除</button>
+    </div>
+    <!--visiblity: hidden;-->
+    <div class="imgbox" id="box2">
+        <div style="width: 100%; height: 100px; background-color: darkcyan;"></div><br>
+        <button onclick="hiddenBox()">隐藏</button>
+    </div>
+    <!--display: block; visiblity: visible;-->
+    <div class="imgbox" id="box3">
+        <div style="width: 100%; height: 100px; background-color: darkmagenta;"></div><br>
+        <button onclick="reset()">重置所有</button>
+    </div>
+
+    <script>
+
+        /*
+            display: none; 与 visiblity: hidden; 的区别
+                display: none;          从文档中删除元素，不占据页面空间
+                visiblity: hidden;      隐藏元素，当仍然占据空间
+        */
+
+        function deleteBox(){
+            document.getElementById("box1").style.display = "none";
+        }
+
+        function hiddenBox(){
+            document.getElementById("box2").style.visibility = "hidden";
+        }
+
+        function reset(){
+            document.getElementById("box1").style.display = "block";
+            document.getElementById("box2").style.visibility = "visible";
+        }
+
+    </script>
+</body>
+</html>
