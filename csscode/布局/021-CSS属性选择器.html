@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS属性选择器</title>
+</head>
+
+    <script>
+        /*
+            [attribute]选择器用于选取带有指定属性的元素
+
+            [attribute="value"] 选择器用于选取带有指定属性和值的元素
+
+            [attribute~="value"] 选择器选取属性值包含指定词的元素
+
+            [attribute|="value"] 选择器用于选取指定属性以指定值开头的元素
+                值必须是完整或单独的单词,比如 class="top" 或者后跟连字符的,比如 class="top-text"
+
+            [attribute^="value"] 选择器用于选取指定属性以指定值开头的元素
+                值不必是完整单词
+
+            [attribute$="value"] 选择器用于选取指定属性以指定值结尾的元素
+                值不必是完整单词
+
+            [attribute*="value"] 选择器选取属性值包含指定词的元素
+                值不必是完整单词
+        */
+    </script>
+
+    <style>
+        a[target] {
+            background-color: aqua;
+        }
+    </style>
+
+<body>
+    <h1>CSS [attribute] 选择器</h1>
+    <p>带有 target 属性的链接获得颜色背景:</p>
+    <a href="https://www.w3school.com">w3school.com.cn</a>
+    <a href="http://www.disney.com" target="_blank">disney.com</a>
+    <a href="http://www.wikipedia.org" target="_top">wikipedia.org</a>
+</body>
+</html>

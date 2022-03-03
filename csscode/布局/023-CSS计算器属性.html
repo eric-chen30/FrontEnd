@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS计算器</title>
+
+    <style>
+        body {
+            counter-reset: section;
+        }
+
+        h2::before {
+            counter-increment: section;
+            content: "Section " counter(section) ": ";
+        }
+    </style>
+
+</head>
+
+    <script>
+        /*
+            counter-reset           创建或重置计算器
+            counter-increment       递增计数器值
+            content                 插入生成内容
+            counter()/counters()    将计数器的值添加到元素
+        */
+    </script>
+
+<body>
+    <h1>使用 CSS 计数器:</h1>
+    <h2>HTML 教程</h2>
+    <h2>CSS 教程</h2>
+    <h2>JavaScript 教程</h2>
+</body>
+</html>
