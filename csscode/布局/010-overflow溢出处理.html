@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>overflow溢出</title>
+</head>
+
+    <script>
+        /*
+            overflow属性: 控制因内容太多而容器无法容纳的情况,主要有下面几个属性值
+                visible:    默认,溢出内容没有被剪裁,在容器外渲染
+                hidden:     溢出内容被剪裁,不显示
+                scroll:     溢出内容被剪裁,添加滚动条可查看溢出内容
+                auto:       与scroll类型,但是是否有滚动条是根据内容而定的
+        */    
+    </script>
+
+    <style>
+        div.box1 {
+            background-color: aquamarine;
+            width: 200px;
+            height: 50px;
+            border: 2px solid sandybrown;
+            /* overflow: visible; */
+            /* overflow: hidden; */
+            /* overflow: scroll; */
+            overflow: auto;
+            /* margin: auto; 使水平居中*/    
+        }
+
+        div.box2 {
+            background-color: aquamarine;
+            width: 200px;
+            height: 50px;
+            border: 2px solid sandybrown;
+            /* overflow: visible; */
+            /* overflow: hidden; */
+            /* overflow: scroll; */
+            overflow: scroll;
+            /* margin: auto; 使水平居中*/    
+        }
+    </style>
+
+<body>
+    <h1>CSS 溢出</h1>
+    <h2>默认情况下,溢出是可见的,这意味着它不会被裁剪,而是在元素框外渲染:</h2>
+    <div class="box1">scroll和auto之间的区别</div>
+    <br><h2>scroll无论内容是否溢出都有滚动条样式,而auto只有内容溢出时才有滚动条</h2><br>
+    <div class="box2">当您想更好地控制布局时,可以使用 overflow 属性。overflow 属性规定如果内容溢出元素框会发生什么情况。</div>
+</body>
+</html>

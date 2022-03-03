@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>网络/等宽的框</title>
+</head>
+
+    <style>
+
+        /*
+            box-sizing: content-box | border-box | inherit
+                content-box: 高度和宽度应用到元素的内容框,在高度和宽度之外绘制元素的内边距和边框 
+                border-box: 1. 元素设定的高度和宽度决定了元素的边框盒，指定的内边距和和边框在设定的宽高中绘制
+                            2. 内容的宽高 = 设置的宽高 -    边框和内边距
+                inherit: 从父元素继承box-sizing属性
+            
+            默认为 content-box      标准盒模型
+                   border-box       怪异盒模型
+        */
+        * {
+            box-sizing: border-box;  /* 确保不会由于额外的内边距填充而破坏 */
+        }
+
+        .box {
+            float: left;
+            width: 33.33%;
+            padding: 50px;
+        }
+
+        .clearfix::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+    </style>
+
+<body>
+    <h1>网格框</h1>
+    <h1>并排浮动的框:</h2>
+    
+    <div class="clearfix">
+        <div class="box" style="background-color:#bbb"><p>1</p></div>
+        <div class="box" style="background-color:#ccc"><p>2</p></div>
+        <div class="box" style="background-color:#ddd"><p>3</p></div>
+    </div>
+
+    <h2>请注意,我们还用了 clearfix hack 来处理布局流,并添加了 box-sizing 属性,以确保框不会由于额外的内边距(填充)而损坏。尝试删除此代码以查看效果。</h2>
+</body>
+</html>

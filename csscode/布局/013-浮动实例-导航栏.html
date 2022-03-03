@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>浮动布局导航栏</title>
+</head>
+
+    <style>
+        ul {
+            list-style-type: none;  /* 无标签标记 */
+            margin: 0;
+            padding: 0;             /* 溢出内容被剪切 */
+            overflow: hidden;
+            background-color: black;
+        }
+
+        li {
+            float: left;
+        }
+
+        li a{
+            display: inline-block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        li a:hover {
+            background-color: blue;
+        }
+
+        .active {
+            background-color: red;
+        }
+    </style>
+
+<body>
+    <ul>
+        <li><a href="#home" class="active">Home</a></li>
+        <li><a href="#news">Mews</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="#about">About</a></li>
+    </ul>
+</body>
+</html>

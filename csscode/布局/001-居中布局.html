@@ -6,7 +6,158 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>居中布局</title>
 </head>
+
+    <style>
+        .center {
+            width: 50%;         /* 设置元素宽度防止延伸至容器边缘 */
+            margin: auto;       /* 元素占用指定宽度，剩下空间两个外边距平分 */
+            border: 3px solid black;
+            padding: 10px;
+            text-align: center;  /* 容器内文本居中 */
+        }
+
+        img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .position_right {
+            position: absolute;
+            right: 0px;
+            width: 500px;
+            border: 3px solid darkblue;
+            padding: 10px;
+        }
+
+        .float_right {
+            float: right;
+            border: 3px solid firebrick;
+            padding: 10px;
+            width: 500px;
+        }
+
+        .vertical_center {
+            padding: 70px 0;
+            border: 3px solid forestgreen;
+        }
+
+        .compltely_center{
+            padding: 30px 0;
+            text-align: center;
+            border: 4px solid hotpink;
+        }
+
+        .lineheight_center{
+            height: 200px;
+            line-height: 200px;
+            text-align: center;
+            border: 3px solid pink;
+        }
+
+        .lineheight_center h3 {
+            line-height: 1.5;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .position_transform_center {
+            height: 200px;
+            position: relative;
+            border: 4px solid rosybrown;
+        }
+
+        .position_transform_center p {
+            margin: 0;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+        }
+
+        .flex_center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 160px;
+            border: 4px solid greenyellow;
+        }
+    </style>
+
 <body>
-    
+    <!--width + margin: auto;使这个div在页面水平居中  且如果没有设置width属性或者设为100%则居中对齐无效-->
+    <div class="center">
+        <h3>这个div元素是居中的</h3>
+    </div>
+
+    <!--居中对齐图像,因为img标签为行内元素,需要将display:block;设置为块状元素-->
+    <div style="text-align: center;">
+        <h1>居中图像</h1>
+    </div>
+    <img src="./imgs/001.jpg" alt="girl" style="width: 15%;">
+
+    <!--使用positiion 左/右对齐-->
+    <div style="text-align: center;">
+        <h1>position: absolut; right: 0 ;右对齐</h1>
+    </div>
+    <div class="position_right">
+        <h3>在我更年轻,更脆弱的岁月中,父亲给了我一些建议,从那以后我就一直在思考。</h3>
+    </div>
+
+    <!--使用float 左/右对齐-->
+    <br><br><br><br>
+    <div style="text-align: center;">
+        <h1>float: right;右对齐</h1>
+    </div>
+    <div class="float_right">
+        <h3>在我更年轻,更脆弱的岁月中,父亲给了我一些建议,从那以后我就一直在思考。</h3>
+    </div>
+
+    <br><br><br><br>
+    <!--垂直对齐:使用padding-->
+    <div style="text-align: center;clear: both;">
+        <h1>垂直居中</h1>
+    </div>
+
+    <h2>在此例中,我们使用 padding 属性将 div 元素垂直居中:</h2>
+
+    <div class="vertical_center">
+        <h3>我是垂直居中的。</h3>
+    </div>
+
+    <br>
+    <!--水平垂直对齐:使用padding + text-align: center;-->
+    <div style="text-align: center;clear: both;">
+        <h1>水平垂直居中</h1>
+    </div>
+    <div class="compltely_center">
+        <p>我是水平垂直居中的。</p>
+    </div>
+
+    <!--使用line-height垂直对齐-->
+    <div style="text-align: center;">
+        <h1>垂直对齐</h1>
+    </div>
+    <div class="lineheight_center">
+        <p>单行文本: line-height = height = 200px; text-align: center;</p>
+    </div>
+
+    <!--使用position和transform属性将div元素垂直水平居中-->
+    <div style="text-align: center;">
+        <h1>使用position和transform属性将div元素垂直水平居中</h1>
+    </div>
+    <div class="position_transform_center">
+        <p>--使用position和transform属性将div元素垂直水平居中--</p>
+    </div>
+
+    <!--使用flexbox实现水平垂直居中-->
+    <div style="text-align: center;">
+        <h1>使用flexbox实现垂直水平居中</h1>
+    </div>
+    <div class="flex_center">
+        <p>使用flexbox实现垂直水平居中</p>
+      </div>
+
 </body>
 </html>

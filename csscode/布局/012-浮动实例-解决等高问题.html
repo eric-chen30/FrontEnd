@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>flex布局</title>
+</head>
+
+    <script>
+        /*
+            利用浮动布局,创建宽度相等并排的浮动框比较容易,但创建相同高度却不容易
+            一个快速解决方案是设置相同的高度,这样子的布局不具有灵活性,随着内容的
+            变化可能会破坏页面布局
+
+            flex box弹性盒子可以自动拉伸框和最长的框一样
+        */
+    </script>
+
+    <style>
+        .flex-container {
+            display: flex;
+            flex-wrap: nowrap;      /* flex-wrap属性规定felx容器是单行还是多行 */
+            background-color: aqua;
+        }
+        .flex-container .box {
+            background-color: antiquewhite;
+            width: 50%;             /* 宽度相等,flex布局高度随内容变化而变化*/
+            margin: 10px;
+            text-align: center;
+            line-height: 75px;
+            font-size: 30px;
+        }
+    </style>
+
+<body>
+    <h1>弹性框</h1>
+
+    <div class="flex-container">
+        <div class="box">框 1 - 这是一些文本,以确保内容真的很高。这是一些文本,以确保内容真的很高。这是一些文本,以确保内容真的很高。这是一些文本,以确保内容真的很高。</div>
+        <div class="box">框 2 - 我的高度与框 1 保持一致。</div>
+    </div>
+
+    <p>请尝试调整浏览器窗口的大小,以查看弹性布局。</p>
+    <p><b>注释:</b>Internet Explorer 10 或更早的版本不支持 Flexbox。</p>
+</body>
+</html>

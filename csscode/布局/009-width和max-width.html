@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>width 和 max-width的区别</title>
+</head>
+
+    <script>
+        /*
+            块级元素,设置width属性,防止其延伸至容器边缘,此时可以将margin: auto；使容器水平居中
+            但是当浏览器小于设置的宽度时，这个块级元素并不会随浏览器窗口变化而变化，导致下方产生水平拖动条
+            使用max-width可以改善浏览器对小窗口的处理
+        
+        */  
+
+    </script>
+
+    <style>
+        div.box1 {
+            width: 600px;
+            margin: auto;
+            border: 5px solid rgb(92, 11, 221);
+        }
+        div.box2 {
+            max-width: 600px;
+            margin: auto;
+            border: 5px solid rgb(8, 201, 226);
+        }
+
+    </style>
+
+<body>
+    
+    <div class="box1">设置这个div的宽度为500px,外边距设置为auto</div>
+    <br><br>
+    <div class="box2">设置这个div的最大宽度为500px,外边距设置为auto</div>
+
+</body>
+</html>
