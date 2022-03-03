@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>伪类</title>
+</head>
+
+    <script>
+        /*
+            伪类用于定义元素的特殊状态,可以用于:
+                1. 设置鼠标悬停在元素上时的样式
+                2. 为已经访问和没有访问的链接设置不同的样式
+                3. 设置元素获得焦点的样式
+                .......
+            
+            伪类的语法:
+                selector: pseudo-clss {
+                    property: value;
+                }
+            
+                1. 选择器匹配作为任何元素的第一个子元素的任何 <p> 元素
+                p:first-child {
+                    color: blue;
+                }
+
+                2. 选择器匹配所有 <p> 元素中的第一个 <i> 元素
+                p i:first-child {
+                    color: blue;
+                }
+
+                3. 选择器匹配作为另一个元素的第一个子元素的 <p> 元素中的所有 <i> 元素
+                p:first-child i {
+                    color: blue;
+                }
+
+                4. :lang 伪类允许您为不同的语言定义特殊的规则。
+
+                5. 常用的CSS伪类:
+                    :active     :checked     :focus     :hover      :first-child    :last-child     :read-only      :vilid    :visited
+
+                6. 所有CSS伪元素: 用于设置元素指定部分的样式
+                    1. 设置元素首行、首字母的样式
+                    2. 在元素内容之前或者之后插入内容
+                    ::after     ::before      ::first-letter    ::first-line    ::selection
+                
+        */
+    </script>
+
+    <style>
+        /*未访问的链接*/
+        a:link {
+            color: forestgreen;
+        }
+        /*已访问的链接*/
+        a:visited {
+            color: blue;
+        }
+        /*鼠标悬停链接*/
+        a:hover {
+            color: aquamarine;
+        }
+        /*已选择的链接*/
+        a:active {
+            color: bisque;
+        }
+
+        h1::before {
+            content: url(./imgs/001.jpg);
+        }
+
+        ::selection {
+            color: aqua;
+            background: yellow;
+        }
+    </style>
+
+<body>
+    <h1>CSS 链接</h1>
+    <p><b><a href="/index.html" target="_blank">这是一个链接</a></b></p>
+    <p><b>注释:</b>在 CSS 定义中,a:hover 必须位于 a:link 和 a:visited 之后才能生效。</p>
+    <p><b>注释:</b>在 CSS 定义中,a:active 必须位于 a:hover 之后才能生效。</p>
+
+    <!--伪元素 元素前面插入图片-->
+    <h1>这是一个标题</h1>
+    <p>::before 伪元素在一个元素的内容之前插入内容。</p>
+    <h1>这是一个标题</h1>
+
+</body>
+</html>

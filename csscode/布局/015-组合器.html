@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>组合器</title>
+</head>
+
+    <script>
+        /*
+            CSS四种不同的组合器：
+                -后代选择器         element element         div p       div元素内所有的p标签
+                    后代选择器渲染的内容包含子选择器
+                -子选择器           element > element       div > p     父元素是div元素的所有p标签
+                    选择子代而不是所有后代
+                -相邻兄弟选择器     element + element       div + p     所有紧随div元素后的p标签
+                -通用兄弟选择器     element ~ element       p ~ ul      选择指定元素后面的所有同级元素     
+        */
+    </script>
+
+    <style>
+
+        /* 相邻兄弟选择器  选择div后紧跟的p标签 */
+        /* div + p {
+            background-color: aqua;
+        } */
+
+        /* 通用兄弟选择器  指定元素后指定的所有同级元素 */
+        div ~ p {
+            background-color: aquamarine;
+        }
+
+    </style>
+
+<body>
+    <div>
+        <p>div 中的段落 1。</p>
+        <p>div 中的段落 2。</p>
+    </div>
+      
+    <p>段落 3。不在 div 中。</p>
+    <p>段落 4。不在 div 中。</p>
+</body>
+</html>

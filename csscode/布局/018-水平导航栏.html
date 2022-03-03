@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>水平导航栏</title>
+</head>
+
+    <script>
+        /*
+            有两种创建水平导航栏的方法: 
+            1. 行内(将li标签的display设置为inline) 
+            2. 浮动
+                (1) li标签的float设置为left    
+                (2) 链接a标签display设置为block  + padding + background-color
+
+            3. 将a标签display设置为block的好处:    
+                将链接显示为块元素可以使整个链接区域都可以单击(不仅是文本)
+                可以进行填充(padding height width margin)
+        */
+    </script>
+
+    <style>
+        
+        /* 如果不加这个修饰  浏览器两端会有一些空白*/
+        body {
+            margin: 0;
+        }
+
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: forestgreen;
+            position: fixed;
+            top: 0;
+            width: 100%;
+        }
+
+        li {
+            float: left;
+            border-right: 1px solid black;
+        }
+
+        li:last-child {
+            border-right: none;
+        }
+
+        li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        li a:hover:not(.active) {
+            background-color: #4CAF50;
+        }
+
+        .active {
+            background-color: rgb(11, 211, 11);
+        }
+    </style>
+
+<body>
+    <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#news">News</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li style="float:right"><a class="active" href="#about">About</a></li>
+      </ul>
+
+    <div style="padding:20px;margin-top:30px;background-color:#1abc9c;height:1500px;">
+        <h1>固定的顶部导航栏</h1>
+        <h2>请滚动页面以查看效果。</h2>
+        <h2>页面滚动时导航栏将位于页面顶部。</h2>
+        
+        <p>Some text some text some text some text..</p>
+        <p>Some text some text some text some text..</p>
+        <p>Some text some text some text some text..</p>
+        <p>Some text some text some text some text..</p>
+        <p>Some text some text some text some text..</p>
+        <p>Some text some text some text some text..</p>
+        <p>Some text some text some text some text..</p>
+        <p>Some text some text some text some text..</p>
+        <p>Some text some text some text some text..</p>
+        <p>Some text some text some text some text..</p>
+        <p>Some text some text some text some text..</p>
+        <p>Some text some text some text some text..</p>
+        <p>Some text some text some text some text..</p>
+        <p>Some text some text some text some text..</p>
+        <p>Some text some text some text some text..</p>
+        <p>Some text some text some text some text..</p>
+        <p>Some text some text some text some text..</p>
+        <p>Some text some text some text some text..</p>
+        <p>Some text some text some text some text..</p>
+        <p>Some text some text some text some text..</p>
+    </div>
+</body>
+</html>
