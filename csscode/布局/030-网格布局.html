@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>网格布局</title>
+</head>
+
+    <style>
+        /* .item1 { grid-area: header; }
+        .item2 { grid-area: menu; }
+        .item3 { grid-area: main; }
+        .item4 { grid-area: right; }
+        .item5 { grid-area: footer; }
+
+        .grid-container {
+            display: grid;
+            grid-template-areas:
+                'header header header header header header'
+                'menu main main main right right'
+                'menu footer footer footer footer footer';
+            grid-gap: 10px;
+            background-color: #2196F3;
+            padding: 10px;
+        }
+
+        .grid-container > div {
+            background-color: rgba( 255, 255, 255, 0.8);
+            text-align: center;
+            padding: 20px 0;
+            font-size: 30px;
+        } */
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: auto auto auto;
+            background-color: #2196F3;
+            padding: 10px;
+            /* grid-row-gap: 20px;
+            grid-column-gap: 20px; */
+            grid-gap: 20px 20px;
+        }
+
+        .grid-item {
+            background-color: rgba(255, 255,  255,  0.8);
+            border: 1px solid rgba( 0,  0,  0,  0.8);
+            padding: 20px;
+            font-size: 30px;
+            text-align: center;
+        }
+
+        .item1 {
+            grid-column-start: 1;
+            grid-column-end: 3;
+
+        }
+    </style>
+
+    <script>
+        /*
+            网格容器属性:
+                grid-template-columns       定义网格布局中的列数,并可定义每列的宽度
+                    grid-template-columns: auto auto auto auto;
+                    grid-template-columns: 80px 200px auto 40px;
+                
+                grid-template-columns       定义每列的高度
+                    grid-template-rows: 80px 200px;
+                
+                justify-content     用于容器内对齐整个网格
+                    需要注意的是: 网格的总宽度必须小于容器的宽度,才能生效
+                    有如下几个值：
+                        justify-content: space-evenly;
+                        justify-content: space-around;
+                        justify-content: space-between;
+                        justify-content: center;
+                        justify-content: start;
+                        justify-content: end;
+                
+                align-content       垂直对齐容器内的整个网络
+                    注意: 容器的高度必须要小于网格的总高度
+                    有如下几个值:
+                        align-content: center;
+                        align-content: space-evenly;
+                        align-content: space-around;
+                        align-content: space-between;
+                        align-content: start;
+                        align-content: end;
+            
+            网格项目:
+                grid-column     定义将项目放在那一列上  也可以定义项目的开始和结束位置
+                grid-column 属性是 grid-column-start 和 grid-column-end 属性的简写属性
+                    grid-column: 1 / 5;         从第 1 列开始并在第 5 列之前结束
+                    grid-column: 1 / span 3;    从第 1 列开始，并跨越 3 列
+                
+                grid-row        定义了将项目放置在哪一行    定义项目的开始位置以及结束位置
+                    grid-row: 1 / 4;            row-line 1 开始，在 row-line 4 结束
+                    grid-row: 1 / span 2;       从第 1 行开始并跨越 2 行
+                
+                grid-area       grid-row-start、grid-column-start、grid-row-end 和 grid-column-end 属性的简写属性
+                    grid-area: 1 / 2 / 5 / 6;               行线 1-5  列线 2-6
+                    grid-area: 2 / 1 / span 2 / span 3;     行线2开始  列线1开始  分别跨越2 3 个项目
+                
+                grid-area 属性也可以用于为网格项目分配名称。
+                通过网格容器的 grid-template-areas 属性来引用命名的网格项目
+                具体写法见注释部分
+
+
+        */
+    </script>
+
+<body>
+    <!-- <div class="gird-container">
+        <div class="item1">Header</div>
+        <div class="item2">Menu</div>
+        <div class="item3">Main</div>
+        <div class="item4">Right</div>
+        <div class="item5">Footer</div>
+    </div> -->
+
+    <div class="grid-container">
+        <div class="grid-item item1">1</div>
+        <div class="grid-item">2</div>
+        <div class="grid-item">3</div>  
+        <div class="grid-item">4</div>
+        <div class="grid-item">5</div>
+        <div class="grid-item">6</div>  
+        <div class="grid-item">7</div>
+        <div class="grid-item">8</div>
+        <div class="grid-item">9</div>  
+      </div>
+</body>
+</html>

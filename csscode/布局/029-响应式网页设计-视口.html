@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>视口</title>
+</head>
+
+    <script>
+        /*
+            视口（viewport）是用户在网页上的可见区域。
+            视口随设备而异，在移动电话上会比在计算机屏幕上更小。
+            为了解决这个问题，这些设备上的浏览器会按比例缩小整个网页以适合屏幕大小。
+
+            通过meta标签来控制视口:
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                
+                width=device-width          部分将页面的宽度设置为跟随设备的屏幕宽度
+                initial-scale=1.0           浏览器首次加载页面时,initial-scale=1.0 部分设置初始缩放级别
+            
+            遵循的一些附加规则:
+                1. 请勿使用较大的固定宽度元素   因为如果固定宽度太大,可能会导致视口水平滚动
+                2. 不要让内容依赖于特定的视口宽度来呈现好的效果
+                3. 使用CSS媒体查询为小屏幕和大屏幕应用不同的样式    尽量使用相对宽度(百分比)  尽量避免使用绝对宽度
+
+
+            响应式布局-图像:
+                width: 100%; height: auto;
+                图像将响应式放大或缩小   图像可以放大到大于原始大小     更好的解决方案是使用max-width
+                max-width: 100%;        不会放大到大于其原始大小
+
+            背景图像响应调整大小和缩放比例:
+                1. background-size 设置为 contain        背景图像缩放尝试匹配内容
+                2. background-size 设置为 100% 100%      图像拉伸覆盖整个内容区域
+                3. background-size 设置为 cover          覆盖整个区域、但是会保留长宽比、因此有部分会被剪裁
+            
+            html5引入了<picture>元素,该元素可以使你定义多幅图像         作用类似于 <video> 和 <audio> 元素
+                <picture>
+                    <source srcset="img_smallflower.jpg" media="(max-width: 400px)">
+                    <source srcset="img_flowers.jpg">
+                    <img src="img_flowers.jpg" alt="Flowers">
+                </picture>
+            srcset 属性是必需的，它定义图像的来源   使用该元素标签需要考虑浏览器的兼容问题
+
+
+        */    
+    </script>
+
+<body>
+    
+</body>
+</html>
