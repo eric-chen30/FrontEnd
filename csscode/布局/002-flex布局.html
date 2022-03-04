@@ -27,9 +27,43 @@
         */  
     </script>
 
-    <style></style>
+    <style>
+        .container {
+            display: flex;
+            flex-direction: row;                /* 横向排列  为默认值 */
+            /* flex-direction: column; */       /* 纵向排列 */
+            flex-wrap: wrap;                    /* 必要时进行换行 nowrap默认不对flex项目进行换行 */
+            background-color: black;
+            width: 50%;
+            /* justify-content: center;   用于对齐flex项目 */
+            /* align-items: center;       用于垂直对齐flex项目*/
+            /* align-content: center;        用于对齐弹性线 */
+        }
+
+        .container div {
+            background-color: aquamarine;
+            width: 100px;
+            margin: 10px;
+            text-align: center;
+            line-height: 60px;
+            font-size: 30px;
+        }
+    </style>
 
 <body>
-
+    <div class="container">
+        <div>1</div>
+        <div>2</div>
+        <div>3</div>
+        <div>4</div>
+        <div>5</div>
+        <div>6</div>
+        <div>7</div>
+        <div>8</div>
+        <div>9</div>
+        <div>10</div>
+        <div>11</div>
+        <div>12</div>
+    </div>
 </body>
 </html>

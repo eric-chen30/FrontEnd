@@ -5,16 +5,42 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>盒子模型</title>
+
+    <style>
+        .box1 {
+            box-sizing: content-box;
+            width: 300px;
+            height: 300px;
+            border: 3px solid pink;
+            padding: 20px;
+            margin: auto;
+        }
+
+        .box2 {
+            box-sizing: border-box;
+            width: 300px;
+            height: 300px;
+            border: 3px solid lightblue;
+            padding: 20px;
+            margin: auto;
+        }
+    </style>
+
 </head>
 
     <script>
         /*
             1. content-box
+                盒子高度 = 内容高度 + padding + border
+                盒子宽度 = 内容宽度 + padding + border
             2. border-box
+                设置的width/height包含了padding、border
+                border-box设定宽高后盒子大小不会改变,在开发中比较常用
         */
     </script>
 
 <body>
-    
+    <div class="box1">padding和border值会影响盒子的大小</div>
+    <div class="box2">padding和border值不会影响盒子大小</div>
 </body>
 </html>
