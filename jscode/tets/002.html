@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+    <script>
+        /*
+            n个黑白棋子  1-n  最开始黑色向上
+            q次操作 [L，R]内棋子反转
+            求：每次操作后,n颗棋子中黑色向上的个数
+
+            思路：
+            1. n为总共多少个棋子   q为反转次数
+            2. 需要指明q次反转区间  L  R
+            3. 输出每次反转之后黑色棋子向上的个数
+        */
+
+            function countBlack() {
+                var all = 100;
+                console.log(all);
+                var verseCount = this.q;
+                var arr = [];
+                for(var i=0;i<all;i++){
+                    arr[i] = true;             // true表示黑棋,false表示白棋
+                }
+                console.log(arr);
+
+                var left = 1;
+                var right = 30;
+                var count  = right - left + 1;
+                console.log(count);
+                
+                for(var i=0; i<count; i++){
+                    arr[left + i -1] = !arr[left + i -1];
+                }
+                console.log(arr);
+
+                var blackNumbers = 0
+
+                for(var j=0; j<arr.length; j++) {
+
+                    if(arr[j] === true){
+                        blackNumbers ++;
+                    }
+                }
+                console.log("黑色棋子为:" + blackNumbers);
+
+            }
+
+            countBlack();
+
+    </script>
+
+<body>
+    
+</body>
+</html>
