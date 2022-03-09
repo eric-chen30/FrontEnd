@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>let var const的区别</title>
+</head>
+<body>
+    <script>
+
+        /*
+            var:
+            1. 在函数内部使用var定义，那么该变量的作用域为函数内部，而如果在函数外部使用var定义变量，那么这个变量就是全局作用域
+            2. 变量提升：如果在函数内部声明变量且省略var关键字，那么该变量就会提升为全局变量，全局作用域中如果存在该变量，那么就会更新值
+
+            let:
+            1. 块级作用域
+            2. 同一个块级作用域中，不能重复声明变量
+            3. 不存在变量提升
+
+        */
+
+        // const 定义的变量必须进行初始化，并且不可以进行修改
+        const a = 10
+        console.log('初始化a的值:' + a)     // 初始化a的值:10
+        try{
+            a = 5
+        console.lof('修改后a的值' + a)      // Uncaught TypeError: Assignment to constant variable.  赋值给常数变量 ×
+        }catch(e){
+            console.log(e)
+        }
+
+        // var定义的变量可以修改，如果不进行初始化，输出undefined，不会报错
+        var b
+        console.log('未进行初始化b的值:' + b)
+        b = 10
+        console.log('赋值后b的值:' + b)
+
+        // let是块级作用域 函数内部变量使用let定义后，对函数外部没有影响
+        let c =3;
+        console.log('函数外定义的变量c:' + c)
+        
+        function change(){
+            let c = 6;
+            console.log('函数内部定义的变量c:' + c)
+        }
+        change()
+
+        console.log('函数调用后let定义c不受函数内部c值的影响,此时的c值:' + c)
+
+        // 经典例子
+        // 0 1 2 3 4 5 6 7 8 9
+        for (let i = 0; i < 10; i++) {
+            setTimeout(function() {
+                console.log(i)
+            }, 100) 
+        }
+        // 10 个 10
+        for (var i = 0; i < 10; i++) {
+            console.log(i)
+            setTimeout(function() {
+                console.log(i)
+            }, 100) 
+        }
+
+
+    </script>
+</body>
+</html>
