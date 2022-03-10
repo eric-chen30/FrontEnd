@@ -1,4 +1,4 @@
-// 分别暴露
+// export xxx   分别暴露属性和方法
 export function foo() {
     console.log('module1 foo()')
 }
