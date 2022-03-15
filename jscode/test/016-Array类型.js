@@ -70,11 +70,77 @@ console.log(Array.isArray(true));
  * 2. 针对复杂类型的数组，找出所有年龄大于18岁的男生
  */
 
+console.log([1,2,3,4,5].filter(x => {return x%2 !== 0}));  // [ 1, 3, 5 ]
+
+var arrObj = [
+    {
+        gender: 'male',
+        age: 20
+    },
+    {
+        gender: 'female',
+        age: 22
+    },
+    {
+        gender: 'male',
+        age: 16
+    }
+];
+console.log(arrObj.filter(function(stu){
+    return stu.age>18 && stu.gender == 'male';      // [ { gender: 'male', age: 20 } ]
+}));
 
 /**
- * reduce()函数累加器处理数组元素
+ * reduce()函数累加器处理数组元素，接收一个函数作为累加器，将数组中的每一个元素从左到右依次累加器，返回最终结果
  * 1. 求数组每个元素相加的和
+ *      适合用来累加数组元素，如果不设置初始值，默认数组第一个值为初始值，如果设置初始值，需要设置为0，以便于求和
  * 2. 统计数组中每个元素出现的次数
  * 3. 多维统计数据
  * 
  */
+
+var arr2 = [1,2,3,4,5];         
+var sum = arr2.reduce((accumulator,currentValue) => {return accumulator + currentValue;},0);
+console.log(sum);       // 15
+
+// 初始值 initValue 设置为 {}空对象用来存储键值对
+var countOccurrences = function(arr) {
+    return arr.reduce(function(accumulator,currentValue){
+        // 三目运算符  如果存在++ 如果不存在为 1  currentValue表示正在处理的值
+        accumulator[currentValue] ? accumulator[currentValue]++ : accumulator[currentValue] = 1;
+        return accumulator;
+    },{});
+};
+console.log(countOccurrences([1,2,5,3,2,4,3]));     // { '1': 1, '2': 2, '3': 2, '4': 1, '5': 1 }
+
+
+// 一组人民币值
+var items = [{price: 10}, {price: 50}, {price: 100}];
+
+// 设计不同的汇率计算  reduce()函数的第一个参数可以封装为一个reducers数组，数组中每个元素实际为一个函数，利用reduce()函数单独完成一个汇率的计算
+var reduces = {
+    totalEuros: function(state, item) {
+        return state.euros += item.price * 0.1265;
+    },
+    totalDollars: function(state, item) {
+        return state.dollars += item.price * 0.1487;
+    }
+    
+}
+
+var manageReducers = function(reducers) {
+    return function(state, item) {
+        return Object.keys(reducers).reduce(function(nextState, key){
+            reducers[key](state, item);
+            return state;
+        },{});
+    }
+};
+
+var bigTotalPriceReducer = manageReducers(reduces);
+var initialState = {euros:0,dollars:0};
+var totals = items.reduce(bigTotalPriceReducer,initialState);
+console.log(totals);        // { euros: 20.240000000000002, dollars: 23.792 }
+
+
+
