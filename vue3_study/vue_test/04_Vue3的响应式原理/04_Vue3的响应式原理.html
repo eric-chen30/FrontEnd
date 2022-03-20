@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script type="text/javascript">
+        let person = {
+            name : '张三',
+            age : 18
+        }
+
+        /**
+         * 当我们新增一个属性的时候，因为没有定义【defineProperty】的 set 和 get 方法 因此无法捕获
+         * 无法捕获的话，我们就无法在封装的函数（获取或修改值之后进行的页面渲染操作）中对其进行渲染
+         * 
+         * 同时对于使用 delete 删除属性，需要在 【defineProperty】中设置 configurable
+        */
+
+        // #region
+        // vue2中的实现方式
+        // let p = {}
+        // Object.defineProperty(p, 'name', {
+        //     configurable: true,    // 配置后可以对对象属性进行删除，但是无法捕获，因此无法响应
+        //     get(){
+        //         // 读取时调用
+        //         return person,name
+        //     },
+        //     set(value){
+        //         // 修改时调用
+        //         person.name = value
+        //         return person.name
+        //     }
+        // })
+        // Object.defineProperty(p, 'age', {
+        //     get(){
+        //         // 读取时调用
+        //         return person,age
+        //     },
+        //     set(value){
+        //         // 修改时调用
+        //         person.age = value
+        //         return person.age
+        //     }
+        // })
+        // #endregion
+
+        // Vue3中实现响应式
+        // console.log(window.Proxy)                        //ƒ Proxy() { [native code] }
+        // console.log(new Proxy(person, {}))              // Proxy {name: '张三', age: 18}
+
+        // person 为原对象   p 为代理对象
+        const p = new Proxy(person, {
+            // 这些方法(get set deleteProperty) 即使不写  person和p对象也可以相互映射，修改和设置属性
+            // 写这些方法是为了捕获这些操作，然后进行页面的渲染以及一些其它操作
+
+            // 有人读取p的某个属性时调用
+            get(target, propName) {
+                console.log(`有人读取了p身上的${propName}属性`)
+                return target[propName]
+            },
+            // 有人修改|追加 p 的某个属性时调用
+            set(target, propName, value) {
+                console.log(`有人修改了p身上的${propName}属性,我要去更新界面了!`)
+                target[propName] = value
+            },
+            // 有人删除 p 的某个属性时调用
+            deleteProperty(targrt,propName) {
+                console.log(`有人删除了p身上的${propName}属性,我要去更新界面了!`)
+                // 删除一个对象会返回一个boolean值，将这个boolean值返回
+                return delete targrt[propName]
+            }
+        })
+        
+    </script>
+</body>
+</html>
