@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        /*flex布局*/
+        html,body {
+            height: 100%;
+        }
+        .box {
+            height: 100%;
+            display: flex;
+        }
+        .left {
+            flex: 0 0 200px;    /* flex-grow  flex-shrink  flex-basis缩写*/
+            order: 1;
+            background-color: aqua;
+        }
+        .right {
+            flex: 0 0 200px;    /*flex-basis定义分配剩余空间之前项目占据的主轴空间*/
+            order: 3;
+            background-color: aqua;
+        }
+        .main {
+            flex: auto;
+            order: 2;
+            background-color: pink;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="left"></div>
+        <div class="right"></div>
+        <div class="main"></div>
+    </div>
+</body>
+</html>

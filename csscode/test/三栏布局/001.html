@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        /*定位的方式，中间一列通过 margin: auto;实现自适应*/
+        .left {
+            width: 200px;
+            height: 100%;
+            background-color: aqua;
+            position: absolute;
+            left: 0;
+        }
+        .right {
+            width: 200px;
+            height: 100%;
+            background-color: aqua;
+            position: absolute;
+            right: 0;
+        }
+        .main {
+            height: 100%;
+            background-color: pink;
+            position: absolute;
+            left: 200px;
+            right: 200px;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="left"></div>
+        <div class="right"></div>
+        <div class="main"></div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        html,body {
+            height: 100%;
+            margin: 0;     /* 如果不设置页面会有边距*/
+            padding: 0;
+            background-color: pink;
+        }
+        /*占据整个页面，然后padding向内填充*/
+        .page {
+            box-sizing: border-box;
+            min-height: 100%;
+            padding-bottom: 300px;
+            background-color: aquamarine;
+        }
+
+        footer {
+            height: 200px;
+            margin-top: -200px;   /*如果是正数 远离相邻元素300px，如果为负值，则为靠近300px*/
+            background-color: aqua;
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        主要界面
+    </div>
+    <footer>
+        底部
+    </footer>
+</body>
+</html>
