@@ -5,7 +5,7 @@
 
 <script>
 import {ref} from 'vue'
-import  Demo  from './components/Demo' 
+import  Demo  from './components/Demo'
 
 export default {
   name: 'App',

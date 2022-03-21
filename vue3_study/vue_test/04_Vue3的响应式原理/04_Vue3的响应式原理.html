@@ -20,8 +20,8 @@
          * 同时对于使用 delete 删除属性，需要在 【defineProperty】中设置 configurable
         */
 
-        // #region
         // vue2中的实现方式
+        // #region
         // let p = {}
         // Object.defineProperty(p, 'name', {
         //     configurable: true,    // 配置后可以对对象属性进行删除，但是无法捕获，因此无法响应
@@ -49,8 +49,9 @@
         // #endregion
 
         // Vue3中实现响应式
-        // console.log(window.Proxy)                        //ƒ Proxy() { [native code] }
-        // console.log(new Proxy(person, {}))              // Proxy {name: '张三', age: 18}
+        // #region
+        console.log(window.Proxy)                        //ƒ Proxy() { [native code] }
+        console.log(new Proxy(person, {}))              // Proxy {name: '张三', age: 18}
 
         // person 为原对象   p 为代理对象
         const p = new Proxy(person, {
@@ -60,20 +61,24 @@
             // 有人读取p的某个属性时调用
             get(target, propName) {
                 console.log(`有人读取了p身上的${propName}属性`)
-                return target[propName]
+                // return target[propName]
+                return Reflect.get(target,propName)
             },
             // 有人修改|追加 p 的某个属性时调用
             set(target, propName, value) {
                 console.log(`有人修改了p身上的${propName}属性,我要去更新界面了!`)
-                target[propName] = value
+                // target[propName] = value
+                Reflect.set(target, propName, value)
             },
             // 有人删除 p 的某个属性时调用
             deleteProperty(targrt,propName) {
                 console.log(`有人删除了p身上的${propName}属性,我要去更新界面了!`)
                 // 删除一个对象会返回一个boolean值，将这个boolean值返回
-                return delete targrt[propName]
+                // return delete targrt[propName]
+                Reflect.deleteProperty(target, propName)
             }
         })
+        // #endregion
         
     </script>
 </body>
