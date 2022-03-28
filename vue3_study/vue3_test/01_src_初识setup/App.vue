@@ -1,17 +1,19 @@
 <template>
-  <h1>一个人的信息</h1>
-  <h1>name: {{name}}</h1>
-  <h1>age: {{age}}</h1>
-  <button @click="sayHello">Vue3-说话</button>
-  <br>
-  <br>
-  <button @click="sayWelcome">Vue2说话</button>
-  <br>
-  <br>
-  <button @click="test2">Vue2中的方法去访问vue3中定义的数据和方法</button>
-  <br>
-  <br>
-  <button @click="test3">Vue3中的setup()去访问vue2中定义的数据和方法</button>
+  <div>
+    <h1>一个人的信息</h1>
+    <h1>name: {{name}}</h1>
+    <h1>age: {{age}}</h1>
+    <button @click="sayHello">Vue3-说话</button>
+    <br>
+    <br>
+    <button @click="sayWelcome">Vue2说话</button>
+    <br>
+    <br>
+    <button @click="test2">Vue2中的方法去访问vue3中定义的数据和方法</button>
+    <br>
+    <br>
+    <button @click="test3">Vue3中的setup()去访问vue2中定义的数据和方法</button>
+  </div>
 </template>
 
 <script>

@@ -1,10 +1,12 @@
 <template>
-  <h1>一个人的信息</h1>
-  <h2>name: {{name}}</h2>
-  <h2>age: {{age}}</h2>
-  <h2>工作种类: {{job.type}}</h2>
-  <h2>工作薪水: {{job.salary}}</h2>
-  <button @click="changeInfo">修改信息</button>
+  <div>
+    <h1>一个人的信息</h1>
+    <h2>name: {{name}}</h2>
+    <h2>age: {{age}}</h2>
+    <h2>工作种类: {{job.type}}</h2>
+    <h2>工作薪水: {{job.salary}}</h2>
+    <button @click="changeInfo">修改信息</button>
+  </div>
 </template>
 
 <script>

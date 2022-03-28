@@ -1,15 +1,17 @@
 <template>
-  <h1>一个人的信息</h1>
-  <h2>name: {{person.name}}</h2>
-  <h2>age: {{person.age}}</h2>
-  <h2>工作种类: {{person.job.type}}</h2>
-  <h2>工作薪水: {{person.job.salary}}</h2>
-  <h2>多层嵌套: {{person.job.a.b.c}}</h2>
-  <h2>数组: {{person.hobby}}</h2>
-  <button @click="changeInfo">修改信息</button>
-  <br>
-  <br>
-  <button @click="changeHobby">修改爱好</button>
+  <div>
+    <h1>一个人的信息</h1>
+    <h2>name: {{person.name}}</h2>
+    <h2>age: {{person.age}}</h2>
+    <h2>工作种类: {{person.job.type}}</h2>
+    <h2>工作薪水: {{person.job.salary}}</h2>
+    <h2>多层嵌套: {{person.job.a.b.c}}</h2>
+    <h2>数组: {{person.hobby}}</h2>
+    <button @click="changeInfo">修改信息</button>
+    <br>
+    <br>
+    <button @click="changeHobby">修改爱好</button>
+    </div>
 </template>
 
 <script>

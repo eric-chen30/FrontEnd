@@ -1,6 +1,8 @@
 <template>
-  <input type="text" v-model="keyWord">
-  <h3>{{keyWord}}</h3>
+  <div>
+    <input type="text" v-model="keyWord">
+    <h3>{{keyWord}}</h3>
+  </div>
 </template>
 
 <script>

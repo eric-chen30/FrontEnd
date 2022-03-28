@@ -1,6 +1,8 @@
 <template>
-  <button @click="isShowDemo = !isShowDemo">切换</button>
-  <Demo v-if="isShowDemo"></Demo>
+  <div>
+    <button @click="isShowDemo = !isShowDemo">切换</button>
+    <Demo v-if="isShowDemo"></Demo>
+  </div>
 </template>
 
 <script>
