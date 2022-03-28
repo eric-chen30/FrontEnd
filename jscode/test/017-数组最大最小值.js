@@ -34,7 +34,7 @@ Array.min = function(array) {
     return Math.min.apply(Math,array);
 };
 arr2 = [2,4,10,7,5,8,6];
-// console.log(Array.max(arr2));
+// console.log(Array.max(arr2)); 
 // console.log(Array.min(arr2));
 
 // 3.借助 Array 类型的 reduce 函数

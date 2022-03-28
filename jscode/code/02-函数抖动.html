@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 函数抖动：事件被触发的n秒后执行回调，如果这期间事件被再次触发，那么就重新计时
+        function debounce(fn, wait) {
+            // 声明一个计时器
+            let timer = null
+            
+            return function() {
+                // 保存window Arguments
+                var context = this
+                var args = arguments
+  
+                // 如果定时器存在的话，就取消掉重新计时
+                if(timer){
+                    clearTimeout(timer)
+                    timer = null
+                }
+
+                // 如果定时器不存在的话，开始计时，并调用函数
+                timer = setTimeout(() => {
+                    fn.apply(context, args)
+                },wait)
+            }
+
+        } 
+
+        var debounceRun = debounce(() => {
+            console.log('111')
+        },1000)
+
+        // 鼠标移动后保持1s不动打印111
+        window.addEventListener('mousemove',debounceRun )
+    </script>
+</body>
+</html>
