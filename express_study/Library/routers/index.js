@@ -1,7 +1,8 @@
 var express = require('express')
-var router = express.Router()
-var index = require('../controllers/indexController')
+var router = express.Router();
+var cate = require('../controllers/CateController')
 
-router.get('/',index.sayHello)
+/** Test */
+router.get('/', cate.getAll)
 
 module.exports = router

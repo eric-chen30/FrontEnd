@@ -1,50 +1,49 @@
-const mysql = require("mysql")
-const { sqlConnect } = require("../../apiLearn/util/dbconfig")
+const mysql = require("mysql");
 
 module.exports = {
-    // 数据库配
-    config: {
-        host: 'localhost',
-        port: '3306',
-        user: 'library',
-        password: 'root',
-        database: 'library'
+    //数据库配置
+    config:{
+        host:'localhost',
+        port:'3306',
+        user:'root',
+        password:'123456',
+        database:'library'
     },
-    // 连接池对象
+    //连接数据库，使用连接池方式
+    //连接池对象
     sqlConnect:function(sql,sqlArr,callBack){
-        var pool = mysql.createPool(this.config)
+        var pool = mysql.createPool(this.config);
         pool.getConnection(function(err,conn){
-            console.log('123')
+            console.log('连接成功');
             if(err){
-                console.log('连接失败')
-                return
+                console.log('连接失败');
+                return;
             }
-            conn.query(sql,sqlArr,callBack)
-            conn.release()
+            conn.query(sql,sqlArr,callBack);
+            conn.release();
         })
     },
-
-    // Promise回调
-    SySqlConnect:function(sql,sqlArr){
-        return new Promise((resolve, reject) => {
-            var pool  = mysql.createPool(this.config)
+    //promise 回调
+    SySqlConnect:function(sySql,sqlArr){
+        return new Promise((resolve,reject)=>{
+            var pool = mysql.createPool(this.config);
             pool.getConnection(function(err,conn){
-                console.log('123')
+                console.log('123');
                 if(err){
-                    reject(err)
+                    reject(err);
                 }else{
-                    conn.query(sySql,sqlArr,(err,data) => {
+                    conn.query(sySql,sqlArr,(err,data)=>{
                         if(err){
                             reject(err)
                         }else{
-                            resolve(data)
+                            resolve(data);
                         }
-                        conn.release()
-                    })
+                        conn.release();
+                    });                    
                 }
+                
             })
-        }).catch(err => {
-            console.log(err)
-        })
+        }).catch((err)=>{console.log(err);})
     }
 }
+
