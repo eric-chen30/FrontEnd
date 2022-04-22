@@ -6,9 +6,14 @@ var getAll = (req, res) => {
     var sqlArr = []
     var callBack = (err,data) => {
         if(err){
-            console.log('连接错误')
+            res.send({
+                code: 400,
+                msg: '请求失败'
+            })
         }else{
             res.send({
+                code: 200,
+                msg: '请求成功',
                 data: data
             })
         }

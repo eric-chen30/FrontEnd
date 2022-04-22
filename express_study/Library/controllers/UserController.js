@@ -32,10 +32,13 @@ let login = (req, res) => {
                     msg: '用户不存在,请先注册'
                 })
             }else {
+                let user_id = data[0].user_id;
+                let result = await getUserInfoById(user_id);
+                data[0].userinfo = result[0];
                 res.send({
                     code: 200,
                     msg: '登录成功',
-                    data: data
+                    data: data[0]
                 })
             }
         }
@@ -132,9 +135,23 @@ let setNewPassword = async(req, res) => {
     }
 }
 
+// 修改用户名
+let changeName = async(user_id,user_name) => {
+    let sql = 'update user set user_name=? where user_id=?'
+    let sqlArr = [user_name,user_id]
+    let res = await dbConfig.SySqlConnect(sql,sqlArr)
+    console.log(res)
+    if(res.affectedRows == 1){
+        return true
+    }else{
+        return false
+    }
+}
+
 
 module.exports = {
     login,
     register,
-    setNewPassword
+    setNewPassword,
+    changeName
 }
