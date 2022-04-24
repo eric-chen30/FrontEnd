@@ -29,6 +29,11 @@ router.post('/getReturnBooks',Book.getReturnBooks)
 // 图书归还
 router.post('/returnBook',Book.returnBook)
 
+// 个性标签
+router.post('/getPersonalTags', Book.getPersonalTags)
+
+// 推荐图书列表
+
 
 
 

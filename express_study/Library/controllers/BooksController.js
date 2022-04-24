@@ -269,6 +269,42 @@ let getReturnBooks = async(req, res) => {
     })
 }
 
+
+// 通过 bid 获取 tags字段
+let getTagsByBid = (bid) => {
+    let sql = 'select tag from book where bid=?'
+    let sqlArr = [bid]
+    dbConfig.SySqlConnect(sql,sqlArr)
+}
+
+// 获取个性标签
+let getPersonalTags = async(req, res) => {
+    let user_id = req.body.user_id
+    // 获取收藏和借阅图书的所有标签  转换后变为了字符串而不是数组，不能遍历对象
+    let lendResult = await getLendBookBid(user_id) 
+    let collectResult = await getCollectBookBid(user_id)
+    console.log(lendResult)
+    console.log(collectResult)
+    let lendBidArr = [] 
+    let collectBidArr = []
+    for(let i=0; i< lendResult.length; i++){
+        lendBidArr.push(lendResult[i]['bid'])
+    }
+    for(let i=0; i< collectResult.length; i++){
+        collectBidArr.push(collectResult[i]['bid'])
+    }
+    console.log(lendBidArr,collectBidArr)
+    // 取收藏图书bid与借阅图书bid的交集  然后将 set{1,5} 转换为 [1,5]
+    let unionBid = [...new Set([...lendBidArr,...collectBidArr])]
+    console.log(unionBid)
+    // 通过bid获取相关的tag集合
+    let tags = []
+    
+    
+    
+
+}
+
 module.exports = {
     rankList,
     bookSearch,
@@ -278,5 +314,6 @@ module.exports = {
     unSubscribe,
     getLendBooks,
     returnBook,
-    getReturnBooks
+    getReturnBooks,
+    getPersonalTags
 }
