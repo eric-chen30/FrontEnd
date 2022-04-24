@@ -111,7 +111,7 @@ let getBookInfoByBid = (bid) => {
     return dbConfig.SySqlConnect(sql,sqlArr)
 }
 
-// 我的书单
+// 我的收藏
 let getCollectBooks = async(req, res) => {
     let user_id = req.body.user_id
     // collectBookBid 为一个对象数组
@@ -136,10 +136,147 @@ let getCollectBooks = async(req, res) => {
     })
 }
 
+// 取消收藏
+let unSubscribe = (req, res) => {
+    let sql = 'delete  from collect where bid=?'
+    let bid = req.body.bid
+    let sqlArr = [bid]
+    let callBack = (err, data) => {
+        if(err){
+            res.send({
+                code: 400,
+                msg: err
+            })
+        }else{
+            res.send({
+                code: 200,
+                msg: '取消成功',
+                data: data
+            })
+        }
+    }
+    dbConfig.sqlConnect(sql,sqlArr,callBack)
+}
+
+// 获取我的借阅中不同的bid
+let getLendBookBid = (user_id) =>{
+    let sql = 'select distinct bid from lend where user_id = ?'
+    let sqlArr = [user_id]
+    return dbConfig.SySqlConnect(sql,sqlArr)
+}
+
+// 我的借阅
+let getLendBooks = async(req, res) => {
+    let user_id = req.body.user_id
+    // lendBookBid 为一个对象数组
+    let lendBookBid = await getLendBookBid(user_id)
+    let lendBookBidArr = []
+    // 获取对象的值也就是bid，依次存放到数组中
+    for(var i=0; i<lendBookBid.length; i++){
+        lendBookBidArr.push(lendBookBid[i]['bid'])
+    }
+    // 用来存放查询的数据
+    let data = []
+    let sql = 'select * from book where bid=?'
+    for(var j=0; j<lendBookBidArr.length; j++){
+        let bid = lendBookBidArr[j]
+        let result = await getBookInfoByBid(bid)
+        data.push(result)
+    }
+    res.send({
+        code: 200,
+        msg: '获取成功',
+        data: data
+    })
+}
+
+let deleteLendBookByBid = (bid) => {
+    let sql = 'delete from lend where bid=?'
+    let sqlArr = [bid]
+    return dbConfig.SySqlConnect(sql,sqlArr)
+}
+
+// 图书归还(存在BUG，数据删了，return表中没有插入数据，这里需要使用事务)
+// result.affectedRows >= 1说明数据进行了删除
+// 但是一旦插入失败，那么就需要进行数据回滚
+let returnBook = async(req, res) => {
+    // 根据bid将lend表中记录删除，然后在return表中添加一条记录
+    let bid = req.body.bid
+    let result = await deleteLendBookByBid(bid)
+    console.log(result)
+    console.log(result.affectedRows)
+    if(result.affectedRows >= 1){
+        // 在 return 表中添加一条记录(这里表明为关键字return  会出现问题)
+        // 命名需要注意
+        let sql = 'insert into returnBook(user_id,bid,return_time) value (?,?,?)'
+        console.log(req)
+        let bid = req.body.bid
+        let user_id = req.body.user_id
+        let sqlArr= [user_id,bid,new Date()]
+        console.log(sqlArr)
+        let callBack = (err, data) => {
+            if(err){
+                res.send({
+                    code: 400,
+                    msg: err,
+                })
+            }else{
+                res.send({
+                    code: 200,
+                    msg: '归还成功',
+                    data: data
+                })
+            }
+        }
+        dbConfig.sqlConnect(sql,sqlArr,callBack)
+    }else{
+        res.send({
+            code: 400,
+            msg: '操作失败'
+        })
+    }
+}
+
+// 获取我的归还中不同的bid
+let getReturnBookBid = (user_id) =>{
+    let sql = 'select distinct bid from returnBook where user_id = ?'
+    let sqlArr = [user_id]
+    return dbConfig.SySqlConnect(sql,sqlArr)
+}
+
+// 我的归还
+let getReturnBooks = async(req, res) => {
+    let user_id = req.body.user_id
+    // returnBookBid 为一个对象数组
+    let returnBookBid = await getReturnBookBid(user_id)
+    let returnBookBidArr = []
+    // 获取对象的值也就是bid，依次存放到数组中
+    for(var i=0; i<returnBookBid.length; i++){
+        returnBookBidArr.push(returnBookBid[i]['bid'])
+    }
+    // 用来存放查询的数据
+    let data = []
+    let sql = 'select * from book where bid=?'
+    for(var j=0; j<returnBookBidArr.length; j++){
+        let bid = returnBookBidArr[j]
+        let result = await getBookInfoByBid(bid)
+        data.push(result)
+    }
+    res.send({
+        code: 200,
+        msg: '获取成功',
+        data: data
+    })
+}
+
 module.exports = {
     rankList,
     bookSearch,
     lendBook,
     collectBook,
-    getCollectBooks
+    getCollectBooks,
+    unSubscribe,
+    getLendBooks,
+    returnBook,
+    getReturnBooks
 }
