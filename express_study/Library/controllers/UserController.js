@@ -1,10 +1,31 @@
 var dbConfig = require('../util/dbconfig')
 
-// 通过用户id获取用户详情信息
-let getUserInfoById = (user_id) => {
-    let sql = 'select * from user'
+//获取注册用户的详情
+let getUserInfo = (user_id)=>{
+    let sql = `select * from user where user_id=?`;
+    let sqlArr = [user_id];
+    return dbConfig.SySqlConnect(sql,sqlArr);
+}
+
+let getUserInfoById = (req,res) => {
+    let user_id = req.body.user_id
+    let sql = 'select * from user where user_id=?'
     let sqlArr = [user_id]
-    return dbConfig.SySqlConnect(sql,sqlArr)
+    let callBack = (err,data) => {
+        if(err){
+            res.send({
+                code: 400,
+                msg: err
+            })
+        }else{
+            res.send({
+                code: 200,
+                msg: '获取成功',
+                data: data
+            })
+        }
+    }
+    dbConfig.sqlConnect(sql,sqlArr,callBack)
 }
 
 // 用户登录
@@ -33,7 +54,7 @@ let login = (req, res) => {
                 })
             }else {
                 let user_id = data[0].user_id;
-                let result = await getUserInfoById(user_id);
+                let result = await getUserInfo(user_id);
                 data[0].userinfo = result[0];
                 res.send({
                     code: 200,
@@ -135,17 +156,97 @@ let setNewPassword = async(req, res) => {
     }
 }
 
-// 修改用户名
-let changeName = async(user_id,user_name) => {
+// 修改用户名(接口存在问题，待调试)
+// 不能直接用做接口，需要被其他接口调用  接口传参需要通过req.body来获取值，这种接口，无法获取传的参数
+let changeName = (req, res) => {
+    let user_id = req.body.user_id
+    let user_name = req.body.user_name
     let sql = 'update user set user_name=? where user_id=?'
     let sqlArr = [user_name,user_id]
-    let res = await dbConfig.SySqlConnect(sql,sqlArr)
-    console.log(res)
-    if(res.affectedRows == 1){
-        return true
-    }else{
-        return false
+    let callBack = (err, data) => {
+        if(err){
+            res.send({
+                code: 400,
+                msg: err
+            })
+        }else{
+            res.send({
+                code: 200,
+                msg: '修改成功',
+                data: data
+            })
+        }
     }
+    dbConfig.sqlConnect(sql,sqlArr,callBack)
+}
+
+// 设置个性签名
+let setMotto = (req, res) => {
+    let user_id = req.body.user_id
+    let motto = req.body.motto
+    let sql = 'update user set motto=? where user_id=?'
+    let sqlArr = [motto,user_id]
+    let callBack = (err, data) => {
+        if(err){
+            res.send({
+                code: 400,
+                msg: err
+            })
+        }else{
+            res.send({
+                code: 200,
+                msg: '修改成功',
+                data: data
+            })
+        }
+    }
+    dbConfig.sqlConnect(sql,sqlArr,callBack)
+}
+
+// 设置性别
+let chooseSex = (req, res) => {
+    let user_id = req.body.user_id
+    let sex = req.body.sex
+    let sql = 'update user set sex=? where user_id=?'
+    let sqlArr = [sex,user_id]
+    let callBack = (err, data) => {
+        if(err){
+            res.send({
+                code: 400,
+                msg: err
+            })
+        }else{
+            res.send({
+                code: 200,
+                msg: '修改成功',
+                data: data
+            })
+        }
+    }
+    dbConfig.sqlConnect(sql,sqlArr,callBack)
+}
+
+// 设置年龄
+let chooseAge = (req, res) => {
+    let user_id = req.body.user_id
+    let age = req.body.age
+    let sql = 'update user set age=? where user_id=?'
+    let sqlArr = [age,user_id]
+    let callBack = (err, data) => {
+        if(err){
+            res.send({
+                code: 400,
+                msg: err
+            })
+        }else{
+            res.send({
+                code: 200,
+                msg: '修改成功',
+                data: data
+            })
+        }
+    }
+    dbConfig.sqlConnect(sql,sqlArr,callBack)
 }
 
 
@@ -153,5 +254,9 @@ module.exports = {
     login,
     register,
     setNewPassword,
-    changeName
+    changeName,
+    getUserInfoById,
+    setMotto,
+    chooseSex,
+    chooseAge
 }
