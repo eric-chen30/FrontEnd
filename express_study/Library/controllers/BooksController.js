@@ -274,7 +274,27 @@ let getReturnBooks = async(req, res) => {
 let getTagsByBid = (bid) => {
     let sql = 'select tag from book where bid=?'
     let sqlArr = [bid]
-    dbConfig.SySqlConnect(sql,sqlArr)
+    // 一定要注意写return  不然没有返回值  都为 undefined（找了好半天。）
+    return dbConfig.SySqlConnect(sql,sqlArr)
+}
+
+// reduece 统计词频
+let wordCount = (arr) => {
+    return arr.reduce(function(accumulator, currentValue){
+        accumulator[currentValue] ? accumulator[currentValue]++ : accumulator[currentValue] = 1
+        return accumulator 
+    },{})
+}
+
+// 根据对象value进行排序
+let objSortByValue = (obj) => {
+    var newKey = Object.keys(obj).sort((k1,k2)=> {return k1 - k2})
+    console.log(newKey)
+    var newObj = {}
+    for(let i=0; i < newKey.length; i++){
+        newObj[newKey[i]] = obj[newKey[i]]
+    }
+    return newObj
 }
 
 // 获取个性标签
@@ -299,10 +319,67 @@ let getPersonalTags = async(req, res) => {
     console.log(unionBid)
     // 通过bid获取相关的tag集合
     let tags = []
-    
-    
-    
+    for(let i=0; i < unionBid.length; i++){
+        let tag = await getTagsByBid(unionBid[i])
+        tags.push(tag)
+    }
+    /**
+     * [
+     *      [ RowDataPacket { tag: '治愈系、孤独' } ],   
+     *      [ RowDataPacket { tag: '情感、女性、童年' } ]
+     * ]
+     */
+    console.log(tags)
+    // 将所有tag全部提取出来然后统计词频，返回前5个标签
+    let tagArr = []
+    for(let i=0; i < tags.length; i++){
+        tagArr.push(tags[i][0]['tag'])
+    }
+    /**
+     * [
+            '治愈系', '孤独',
+            '情感',   '女性',
+            '童年',   '治愈系',
+            '孤独',   '情感'
+        ]
+     */
+    let wordArr = tagArr.join('、').split('、')
+    console.log(wordArr)
+    // 词频统计 返回数量TOP N
+    let wordCountRes = wordCount(wordArr)
+    // { '治愈系': 2, '孤独': 2, '情感': 2, '女性': 1, '童年': 1 }
+    console.log(wordCountRes)
+    // 排序
+    let wordCountSortRes = objSortByValue(wordCountRes)
+    // 返回前四标签
+    let topTags  = Object.keys(wordCountSortRes)
+    // JavaScript 中不能使用  0<a<5之类的  需要改为  a>0 && a<5
+    if(0 < topTags.length && topTags.length< 6){
+        res.send({
+            code: 200,
+            msg: '个性标签~',
+            count: topTags.length,
+            data: topTags
+        })
+    }else if(topTags.length > 6){
+        res.send({
+            code: 200,
+            msg: '个性标签!',
+            count: topTags.length,
+            data: topTags.slice(0,5)
+        })
+    }else{
+        res.send({
+            code: 200,
+            msg: '暂时没有个性标签,快去借阅和收藏图书获取吧。',
+            data: topTags
+        })
+    }
+}
 
+// 获取推荐图书列表
+let getReconmendBooks = (req, res) => {
+    
 }
 
 module.exports = {

@@ -32,8 +32,8 @@ router.post('/returnBook',Book.returnBook)
 // 个性标签
 router.post('/getPersonalTags', Book.getPersonalTags)
 
-// 推荐图书列表
-
+// 获取推荐图书列表
+router.post('/getRecommendBooks', Book.getReconmendBooks)
 
 
 
