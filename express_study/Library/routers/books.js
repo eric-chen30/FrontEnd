@@ -35,6 +35,12 @@ router.post('/getPersonalTags', Book.getPersonalTags)
 // 获取推荐图书列表
 router.post('/getRecommendBooks', Book.getReconmendBooks)
 
+/**
+ * 图书分类
+ */
+
+router.post('/getClassBooks', Book.getClassBooks)
+
 
 
 module.exports = router

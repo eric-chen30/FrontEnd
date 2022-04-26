@@ -377,10 +377,69 @@ let getPersonalTags = async(req, res) => {
     }
 }
 
-// 获取推荐图书列表
+// 返回图书数量(使用模糊查询，暂时不进行遍历，效率太低了)
+// let booksCount = () => {
+//     let sql = 'select count(*) from book'
+//     let sqlArr = []
+//     return dbConfig.SySqlConnect(sql,sqlArr)
+// }
+
+
+// 获取推荐图书列表(推荐那些与个性标签至少有两个相同的图书)
 let getReconmendBooks = (req, res) => {
-    
+    // 个性标签
+    let tags = req.body.tags
+    console.log(tags, typeof(tags))
+    // 模糊查询
+    let sql = 'SELECT * FROM `book` WHERE tag like ? or tag like ? or tag like ? or tag like ? or tag like ?' 
+    let sqlArr = []
+    for(let i=0; i < tags.length; i++){
+        sqlArr.push('%' + tags[i] + '%')
+    }
+    console.log(sqlArr)
+    let callBack = (err,data) => {
+        if(err){
+            res.send({
+                code: 400,
+                msg: '查询失败'
+            })
+        }else{
+            res.send({
+                code: 200,
+                msg: '查询成功',
+                data: data
+            })
+        }
+    }
+    // 加个定时器，拖延时间
+    setTimeout(function(){console.log('拖延时间')},1000)
+
+    dbConfig.sqlConnect(sql,sqlArr,callBack)
+}   
+
+
+// 图书分类
+let getClassBooks = (req, res) => {
+    let sql = 'select * from book where type=?'
+    let category = req.body.category
+    let sqlArr = [category]
+    let callBack = (err,data) => {
+        if(err){
+            res.send({
+                code: 400,
+                msg: '查询失败'
+            })
+        }else{
+            res.send({
+                code: 200,
+                msg: '查询成功',
+                data: data
+            })
+        }
+    }
+    dbConfig.sqlConnect(sql,sqlArr,callBack)
 }
+
 
 module.exports = {
     rankList,
@@ -392,5 +451,7 @@ module.exports = {
     getLendBooks,
     returnBook,
     getReturnBooks,
-    getPersonalTags
+    getPersonalTags,
+    getReconmendBooks,
+    getClassBooks
 }
