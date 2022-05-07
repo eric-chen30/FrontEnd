@@ -97,9 +97,7 @@ let register = (req, res) => {
     let passwordReg = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,20}$/
     let stuNumberReg = /^2018\d{11}$/
 
-    if(phoneReg.test(phone) 
-        && passwordReg.test(password) 
-        && stuNumberReg.test(stu_number)
+    if(phoneReg.test(phone) && passwordReg.test(password) && stuNumberReg.test(stu_number)
         && user_name !== ''
         && school !== ''
         && college !== ''
@@ -156,8 +154,7 @@ let setNewPassword = async(req, res) => {
     }
 }
 
-// 修改用户名(接口存在问题，待调试)
-// 不能直接用做接口，需要被其他接口调用  接口传参需要通过req.body来获取值，这种接口，无法获取传的参数
+// 修改用户名
 let changeName = (req, res) => {
     let user_id = req.body.user_id
     let user_name = req.body.user_name

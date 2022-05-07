@@ -24,8 +24,8 @@ let rankList = (req, res) => {
 // 图书搜索(模糊查询)
 let bookSearch = (req, res) => {
     let searchValue = req.body.searchValue
-    let sql = 'select * from book where bname=?'
-    let sqlArr = [searchValue]
+    let sql = 'select * from book where bname like ?'
+    let sqlArr = ['%' + searchValue + '%']
     let callBack = (err, data) => {
         console.log(data)
         if(err){
@@ -297,9 +297,8 @@ let objSortByValue = (obj) => {
     return newObj
 }
 
-// 获取个性标签
-let getPersonalTags = async(req, res) => {
-    let user_id = req.body.user_id
+// 通过user_id获取个性标签
+getPersonalTagsByUserId = async(user_id) => {
     // 获取收藏和借阅图书的所有标签  转换后变为了字符串而不是数组，不能遍历对象
     let lendResult = await getLendBookBid(user_id) 
     let collectResult = await getCollectBookBid(user_id)
@@ -323,26 +322,12 @@ let getPersonalTags = async(req, res) => {
         let tag = await getTagsByBid(unionBid[i])
         tags.push(tag)
     }
-    /**
-     * [
-     *      [ RowDataPacket { tag: '治愈系、孤独' } ],   
-     *      [ RowDataPacket { tag: '情感、女性、童年' } ]
-     * ]
-     */
     console.log(tags)
     // 将所有tag全部提取出来然后统计词频，返回前5个标签
     let tagArr = []
     for(let i=0; i < tags.length; i++){
         tagArr.push(tags[i][0]['tag'])
     }
-    /**
-     * [
-            '治愈系', '孤独',
-            '情感',   '女性',
-            '童年',   '治愈系',
-            '孤独',   '情感'
-        ]
-     */
     let wordArr = tagArr.join('、').split('、')
     console.log(wordArr)
     // 词频统计 返回数量TOP N
@@ -355,40 +340,112 @@ let getPersonalTags = async(req, res) => {
     let topTags  = Object.keys(wordCountSortRes)
     // JavaScript 中不能使用  0<a<5之类的  需要改为  a>0 && a<5
     if(0 < topTags.length && topTags.length< 6){
-        res.send({
-            code: 200,
-            msg: '个性标签~',
-            count: topTags.length,
-            data: topTags
-        })
+        return topTags;
     }else if(topTags.length > 6){
-        res.send({
-            code: 200,
-            msg: '个性标签!',
-            count: topTags.length,
-            data: topTags.slice(0,5)
-        })
+        return topTags.slice(0,5)
     }else{
-        res.send({
-            code: 200,
-            msg: '暂时没有个性标签,快去借阅和收藏图书获取吧。',
-            data: topTags
-        })
+        return topTags
     }
 }
 
-// 返回图书数量(使用模糊查询，暂时不进行遍历，效率太低了)
-// let booksCount = () => {
-//     let sql = 'select count(*) from book'
-//     let sqlArr = []
-//     return dbConfig.SySqlConnect(sql,sqlArr)
+// 获取个性标签
+// let getPersonalTags = async(req, res) => {
+//     let user_id = req.body.user_id
+//     // 获取收藏和借阅图书的所有标签  转换后变为了字符串而不是数组，不能遍历对象
+//     let lendResult = await getLendBookBid(user_id) 
+//     let collectResult = await getCollectBookBid(user_id)
+//     console.log(lendResult)
+//     console.log(collectResult)
+//     let lendBidArr = [] 
+//     let collectBidArr = []
+//     for(let i=0; i< lendResult.length; i++){
+//         lendBidArr.push(lendResult[i]['bid'])
+//     }
+//     for(let i=0; i< collectResult.length; i++){
+//         collectBidArr.push(collectResult[i]['bid'])
+//     }
+//     console.log(lendBidArr,collectBidArr)
+//     // 取收藏图书bid与借阅图书bid的交集  然后将 set{1,5} 转换为 [1,5]
+//     let unionBid = [...new Set([...lendBidArr,...collectBidArr])]
+//     console.log(unionBid)
+//     // 通过bid获取相关的tag集合
+//     let tags = []
+//     for(let i=0; i < unionBid.length; i++){
+//         let tag = await getTagsByBid(unionBid[i])
+//         tags.push(tag)
+//     }
+//     /**
+//      * [
+//      *      [ RowDataPacket { tag: '治愈系、孤独' } ],   
+//      *      [ RowDataPacket { tag: '情感、女性、童年' } ]
+//      * ]
+//      */
+//     console.log(tags)
+//     // 将所有tag全部提取出来然后统计词频，返回前5个标签
+//     let tagArr = []
+//     for(let i=0; i < tags.length; i++){
+//         tagArr.push(tags[i][0]['tag'])
+//     }
+//     /**
+//      * [
+//             '治愈系', '孤独',
+//             '情感',   '女性',
+//             '童年',   '治愈系',
+//             '孤独',   '情感'
+//         ]
+//      */
+//     let wordArr = tagArr.join('、').split('、')
+//     console.log(wordArr)
+//     // 词频统计 返回数量TOP N
+//     let wordCountRes = wordCount(wordArr)
+//     // { '治愈系': 2, '孤独': 2, '情感': 2, '女性': 1, '童年': 1 }
+//     console.log(wordCountRes)
+//     // 排序
+//     let wordCountSortRes = objSortByValue(wordCountRes)
+//     // 返回前四标签
+//     let topTags  = Object.keys(wordCountSortRes)
+//     // JavaScript 中不能使用  0<a<5之类的  需要改为  a>0 && a<5
+//     if(0 < topTags.length && topTags.length< 6){
+//         res.send({
+//             code: 200,
+//             msg: '个性标签~',
+//             count: topTags.length,
+//             data: topTags
+//         })
+//     }else if(topTags.length > 6){
+//         res.send({
+//             code: 200,
+//             msg: '个性标签!',
+//             count: topTags.length,
+//             data: topTags.slice(0,5)
+//         })
+//     }else{
+//         res.send({
+//             code: 200,
+//             msg: '暂时没有个性标签,快去借阅和收藏图书获取吧。',
+//             data: topTags
+//         })
+//     }
 // }
+
+let getPersonalTags = async(req, res) => {
+    let user_id = req.body.user_id
+    let topTags = await getPersonalTagsByUserId(user_id)
+    res.send({
+        code: 200,
+        data: topTags,
+        count: topTags.length
+    })
+}
+
 
 
 // 获取推荐图书列表(推荐那些与个性标签至少有两个相同的图书)
-let getReconmendBooks = (req, res) => {
+let getReconmendBooks = async(req, res) => {
     // 个性标签
-    let tags = req.body.tags
+    // let tags = req.body.tags
+    let user_id = req.body.user_id
+    let tags = await getPersonalTagsByUserId(user_id)
     console.log(tags, typeof(tags))
     // 模糊查询
     let sql = 'SELECT * FROM `book` WHERE tag like ? or tag like ? or tag like ? or tag like ? or tag like ?' 
@@ -412,7 +469,7 @@ let getReconmendBooks = (req, res) => {
         }
     }
     // 加个定时器，拖延时间
-    setTimeout(function(){console.log('拖延时间')},1000)
+    // setTimeout(function(){console.log('拖延时间')},1000)
 
     dbConfig.sqlConnect(sql,sqlArr,callBack)
 }   
